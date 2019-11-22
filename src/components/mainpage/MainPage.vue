@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="slider_area">
+    <div class="bradcam_area breadcam_bg_1">
+      <h3>MainPage</h3>
+    </div>
+    <!-- <div class="slider_area">
       <div class="slider_active owl-carousel">
         <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
           <div class="container">
@@ -51,7 +54,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="about_area">
       <div class="container">
@@ -350,4 +353,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 </style>
