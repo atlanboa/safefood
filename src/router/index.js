@@ -6,7 +6,14 @@ import FoodList from '../components/foodservice/FoodList.vue';
 import FoodView from '../components/foodservice/FoodView.vue';
 import SignUp from '../components/administrator/SignUp.vue';
 import Login from '../components/administrator/Login.vue';
+
+import QNAList from "../components/qna/QNAList.vue";
+import QNAView from "../components/qna/QNAView.vue";
+import AddQNA from "../components/qna/AddQNA.vue";
+import UpdateQNA from "../components/qna/UpdateQNA.vue";
+
 import About from '../components/about/About.vue';
+
 // import VAnimateCss from 'v-animate-css';
 
 // Vue.use(VAnimateCss);
@@ -14,7 +21,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:"/mainpage",
+    path:"/",
     name:"mainpage",
     alias:"mainpage",
     component: MainHeader
@@ -43,10 +50,34 @@ const routes = [
     props:true
   },
   {
+
+    path: "/qna",
+    name: "qnalist",
+    component: QNAList
+  },
+  {
+      path: "/qnaview/:no",
+      name: "qnaview",
+      component: QNAView,
+      props:true
+  },
+  {
+      path: "/addqna",
+      name: "addqna",
+      component: AddQNA
+  },
+  {
+      path: "/updateqna/:no",
+      name: "updateqna",
+      component: UpdateQNA,
+      props:true
+  },
+  {
     path: "/about",
     name: "about",
     component: About,
     props:true
+
   },
 ]
 

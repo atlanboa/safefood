@@ -1,8 +1,9 @@
 <template>
     <div>
     <div class="bradcam_area breadcam_bg_1">
-      <h3>SignUP</h3>
+      <h3>Login</h3>
     </div>
+    <br>
     <div class="container">
     <div class="row">
       <div class="col-12">
@@ -44,27 +45,58 @@
 import http from "../../http-common";
     export default {
         name:"login",
+        props: {
+          msg: String,
+
+        },
         data(){
             return{
-                user:{}
+                user:{
+                  id:null,
+                  pass:null
+                }
 
             }
         },
         methods:{
             login(){
+                window.console.log(JSON.stringify(this.user));
                 http
-                .post("api/insertUser",this.user)
-                .then(response => {
-                    this.user = response.data;
-                })
-                .catch(() => {
+                .post("api/login",this.user)
+                .then(
+                response => {
+                  if (response.status === 200 /*&& "token" in response.body*/) {
+                    window.console.log("로그인 성공");
+                    this.$session.start();
+                    this.$session.set("jwt", response.data);
+                    // this.$http.headers.common["Authorization"] =
+                    //   "Bearer " + response.body.token;
+                    window.console.log(this.$session.getAll());
+                  }
+                },
+                this.$router.push('/index.html')
+                // function(err) {
+                //   window.console.log("err", err);
+                // }
+              ).catch(() => {
                     this.errored = true;
                 })
                 .finally(() => {
                     this.loading = false;
                 });
-                this.$router.push('/')
+                
             }
+        },
+        logout() {
+          this.$session.destroy();
+          window.console.log("로그아웃");
+        },
+        valid() {
+          if (this.$session.exists()) {
+            return true;
+          } else {
+            return false;
+          }
         }
 
     }
