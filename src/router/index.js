@@ -6,6 +6,7 @@ import FoodList from '../components/foodservice/FoodList.vue';
 import FoodView from '../components/foodservice/FoodView.vue';
 import SignUp from '../components/administrator/SignUp.vue';
 import Login from '../components/administrator/Login.vue';
+import About from '../components/about/About.vue';
 // import VAnimateCss from 'v-animate-css';
 
 // Vue.use(VAnimateCss);
@@ -39,6 +40,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    props:true
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: About,
     props:true
   },
 ]

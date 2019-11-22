@@ -16,7 +16,9 @@
                                       <li>
                                         <router-link to="/foodlist">food</router-link>
                                       </li>
-                                      <li><a href="about.html">About</a></li>
+                                      <li>
+                                        <router-link to="/about">About</router-link>
+                                     </li>
                                       <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                           <ul class="submenu">
                                               <li><a href="blog.html">blog</a></li>
