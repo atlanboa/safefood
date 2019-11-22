@@ -6,6 +6,7 @@ import FoodList from '../components/foodservice/FoodList.vue';
 import FoodView from '../components/foodservice/FoodView.vue';
 import SignUp from '../components/administrator/SignUp.vue';
 import Login from '../components/administrator/Login.vue';
+import UserInfo from  '../components/userinfo/UserInfo.vue';
 
 import QNAList from "../components/qna/QNAList.vue";
 import QNAView from "../components/qna/QNAView.vue";
@@ -43,6 +44,12 @@ const routes = [
   component: SignUp,
   props:true
   },
+  {
+    path: "/userinfo",
+    name: "userinfo",
+    component: UserInfo,
+    props:true
+    },
   {
     path: "/login",
     name: "login",
