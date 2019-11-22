@@ -46,10 +46,8 @@ export default {
               this.$session.set("jwt", response.data);
               // this.$http.headers.common["Authorization"] =
               //   "Bearer " + response.body.token;
-              window.console.log(this.$session.getAll());
+              // window.console.log(this.$session.getAll());
 
-              this.$store.commit("login");
-              window.console.log(this.$store.state.loginstate);
 
               
             }
@@ -67,8 +65,8 @@ export default {
     logout() {
       this.$session.destroy();
       window.console.log("로그아웃");
-      window.console.log(this.$session.getAll());
-      this.$store.commit("logout");
+      // window.console.log(this.$session.getAll());
+
       
 
       
