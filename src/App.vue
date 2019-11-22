@@ -11,7 +11,7 @@
                                   <ul id="navigation">
                                       <li>
                                         <!-- <a class="active" href="/">home</a> -->
-                                        <router-link to="/mainpage">Home</router-link>
+                                        <router-link to="/">Home</router-link>
                                       </li>
                                       <li>
                                         <router-link to="/foodlist">food</router-link>
@@ -28,7 +28,9 @@
                                               <li><a href="elements.html">elements</a></li>
                                           </ul>
                                       </li>
-                                      <li><a href="contact.html">Contact</a></li>
+                                      <li>
+                                        <router-link to="/qna">Q&amp;A</router-link>
+                                      </li>
                                   </ul>
                               </nav>
                           </div>
@@ -65,8 +67,24 @@
                                   </ul>
                               </div>
                               <div class="book_btn d-none d-lg-block">
-                                <router-link class="popup-with-form" to="/login">Login</router-link>
+                                <router-link v-if="!valid()" class="popup-with-form" to="/login">Login</router-link>
+                                
+                                <a v-if="valid()">{{this.$session.get('jwt').id}}</a>
+                                <a v-if="valid()" @click="logout">Logout</a>
                               </div>
+                              <div v-if="!valid()" class="collapse" id="collapseExample" style="z-index: 100; right: 0px; width: 250px;">
+                                  <div class="card card-body bg-dark" id="loginWindow">
+                                    <form>
+                                      <input type="hidden" name="command" value="login">
+                                      <label class="text-white">아이디</label><br>
+                                      <input type="text" class="form-control" name="id" id="identifier" required><br>
+                                      <label class="text-white">비밀번호</label><br>
+                                      <input type="password" class="form-control" name="pass" id="password" required><br> <br> 
+                                      <input type="button" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
+                                    </form>
+                                    <a class="btn btn-dark" href="#">비밀번호 찾기</a>
+                                  </div>
+                                </div>
                           </div>
                       </div>
                       <div class="col-12">
@@ -97,11 +115,29 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default {
   name: 'app',
+  data(){
+    return{
+      pageIndex:0,
+    }
+  },
   mounted() {
-    this.$router.push('/mainpage')
+    this.$router.push('/'+'?'+this.pageIndex++)
   },
   components: {
    Footer
+  },methods:{
+    logout() {
+          this.$session.destroy();
+          window.console.log("로그아웃");
+          this.$router.push('/?'+this.pageIndex++)
+        },
+    valid() {
+      if (this.$session.exists()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 </script>

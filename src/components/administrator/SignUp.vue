@@ -3,10 +3,11 @@
     <div class="bradcam_area breadcam_bg_1">
       <h3>SignUP</h3>
     </div>
+    <br>
     <div class="container">
     <div class="row">
       <div class="col-12">
-        <h2 class="contact-title">Get in Touch</h2>
+        <h2 class="contact-title">SignUP</h2>
       </div>
       <div class="col-lg-8">
         <form class="form-contact contact_form" method="post" id="contactForm" novalidate="novalidate" @submit.passive="signup">
@@ -47,11 +48,9 @@
                 </div>
                 <div class="form-group">
                     <label class="form-check-label" v-for="(all, index) in allergies" :key="index">
-
-                      <input v-model="user.allergy" :id="all" :value="all" class="allergy" type="checkbox"/>{{all}}
+                      <input v-model="userall" :id="all" :value="all" class="allergy" type="checkbox"/>{{all}}
                       <br v-if="index%4==0">
                     </label>
-                    
                 <input class="form-control" name="address" id="address" type="text" placeholder="Enter Address"/>
               </div>
             </div>
@@ -76,13 +75,14 @@ export default {
   data() {
       return{
           allergies: ["대두","땅콩","우유","게","새우","참치","연어","쑥","소고기","닭고기","돼지고기","복숭아","민들레","계란흰자"],
+          userall:[],
           user:{
             id:null,
             pass:null,
             address:null,
             phone:null,
             name:null,
-            allergy:[]
+            allergy:""
           }
       }
 
@@ -90,7 +90,9 @@ export default {
   methods: {
     signup(){
       window.console.log(this.user);
-      alert(JSON.stringify(this.user));
+      for (let index = 0; index < this.userall.length; index++) {
+        this.user.allergy+=this.userall[index]+" ";
+      }
       http
       .post("api/insertUser",this.user)
       .then(response => {
@@ -101,6 +103,7 @@ export default {
       })
       .finally(() => {
         this.loading = false;
+        window.console.log(this.user);
       });
       this.$router.push('/')
     }

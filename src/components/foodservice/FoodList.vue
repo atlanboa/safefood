@@ -26,7 +26,7 @@
                     {{food.name}}
                     <br />{{food.maker}}
                     </h4>
-                    <div v-html="food.material"></div>
+                    <div v-html="materialslice(food.material)"></div>
                 </div>
                     <a href="#" class="book_now">{{food.name}} 정보</a>
             </div>
@@ -153,6 +153,8 @@ export default {
         },
         show_detail(code){
             this.$router.push("/foodview/"+code);
+        },materialslice(material){
+          return material.substr(0,100)+"...";
         }
         
     }
