@@ -17,58 +17,21 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-4 col-md-4">
-            <div class="single_offers">
-              <div class="about_thumb">
-                <img src="img/offers/1.png" alt />
-              </div>
-              <h3>
-                Up to 35% savings on Club
-                <br />rooms and Suites
-              </h3>
-              <ul>
-                <li>Luxaries condition</li>
-                <li>3 Adults 2 Children size</li>
-                <li>Sea view side</li>
-              </ul>
-              <a href="#" class="book_now">book now</a>
+            <div v-for="(food, index) in foods" :key="index" class="col-xl-4 col-md-4" @click="show_detail(food.code)">
+                <div class="single_offers">
+                    <div class="about_thumb">
+                        <img class="foodimg" :src="food.img"/>
+                    </div>
+                    <h4>
+                    {{food.name}}
+                    <br />{{food.maker}}
+                    </h4>
+                    <div v-html="food.material"></div>
+                </div>
+                    <a href="#" class="book_now">{{food.name}} 정보</a>
             </div>
-          </div>
-          <div class="col-xl-4 col-md-4">
-            <div class="single_offers">
-              <div class="about_thumb">
-                <img src="img/offers/2.png" alt />
-              </div>
-              <h3>
-                Up to 35% savings on Club
-                <br />rooms and Suites
-              </h3>
-              <ul>
-                <li>Luxaries condition</li>
-                <li>3 Adults & 2 Children size</li>
-                <li>Sea view side</li>
-              </ul>
-              <a href="#" class="book_now">book now</a>
-            </div>
-          </div>
-          <div class="col-xl-4 col-md-4">
-            <div class="single_offers">
-              <div class="about_thumb">
-                <img src="img/offers/3.png" alt />
-              </div>
-              <h3>
-                Up to 35% savings on Club
-                <br />rooms and Suites
-              </h3>
-              <ul>
-                <li>Luxaries condition</li>
-                <li>3 Adults & 2 Children size</li>
-                <li>Sea view side</li>
-              </ul>
-              <a href="#" class="book_now">book now</a>
-            </div>
-          </div>
         </div>
+        
       </div>
     </div>
     <!-- offers_area_end -->
@@ -162,56 +125,38 @@
       </div>
     </div>
     <!-- forQuery_end-->
-
-    <!-- instragram_area_start -->
-    <div class="instragram_area">
-      <div class="single_instagram">
-        <img src="img/instragram/1.png" alt />
-        <div class="ovrelay">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-      <div class="single_instagram">
-        <img src="img/instragram/2.png" alt />
-        <div class="ovrelay">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-      <div class="single_instagram">
-        <img src="img/instragram/3.png" alt />
-        <div class="ovrelay">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-      <div class="single_instagram">
-        <img src="img/instragram/4.png" alt />
-        <div class="ovrelay">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-      <div class="single_instagram">
-        <img src="img/instragram/5.png" alt />
-        <div class="ovrelay">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import http from "../../http-common";
 export default {
-    name:"foodlist"
+    name:"foodlist",
+    data(){
+        return{
+            foods:[],
+            category:"maker",
+        }
+    },
+    mounted(){
+        this.initail();
+    },
+    methods:{
+        initail(){
+            http
+                .get("/api/search/"+this.category)
+                .then(response => (this.foods = response.data))
+                .catch(() => {this.errored = true;})
+                .finally(() => {
+                    this.loading = false; 
+                });
+        },
+        show_detail(code){
+            this.$router.push("/foodview/"+code);
+        }
+        
+    }
+
 };
 </script>
 

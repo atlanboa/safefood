@@ -44,14 +44,17 @@
                           <div class="book_room">
                               <div class="socail_links">
                                   <ul>
-                                      <li>
-                                          <a href="#">
-                                              <i class="fa fa-facebook-square"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <i class="fa fa-twitter"></i>
+                                    <li>
+                                      <router-link to="/signup">signup</router-link>
+                                    </li>
+                                    <li>
+                                      <a href="#">
+                                        <i class="fa fa-facebook-square"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="#">
+                                          <i class="fa fa-twitter"></i>
                                           </a>
                                       </li>
                                       <li>
@@ -62,7 +65,7 @@
                                   </ul>
                               </div>
                               <div class="book_btn d-none d-lg-block">
-                                  <a class="popup-with-form" href="#test-form">Book A Room</a>
+                                <router-link class="popup-with-form" to="/login">Login</router-link>
                               </div>
                           </div>
                       </div>
@@ -87,6 +90,9 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 
 export default {
