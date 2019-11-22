@@ -1,22 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import MainHeader from '../components/mainpage/MainPage.vue'
 
+import FoodList from '../components/foodservice/FoodList.vue'
+// import VAnimateCss from 'v-animate-css';
+
+// Vue.use(VAnimateCss);
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path:"/mainpage",
+    name:"mainpage",
+    alias:"mainpage",
+    component: MainHeader
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path:"/foodlist",
+    name:"foodlist",
+    component: FoodList
   }
 ]
 
