@@ -41,6 +41,11 @@ export default {
   },
   methods: {
     click() {
+      /*
+        일자 클릭되면 도는 메소드
+        convertedDate YYYY-MM-DD 로 변환된 데이터
+
+      */
       const calendar = this.$refs.calendar;
 
       var date = calendar._data.store.list[0].dates[0].date;
@@ -48,13 +53,12 @@ export default {
 
       window.console.log(convertedDate);
 
-      var data = null;
-      if (name === "jeon") {
-        data = this.$data.jeon_info;
-      } else {
-        data = this.$data.kim_info;
-      }
-      window.console.log(data);
+      var data = {
+        date : convertedDate,
+        //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
+        userid : this.$session.get("jwt").id
+      };
+
       this.$modal.show(
         DayDetail,
         {

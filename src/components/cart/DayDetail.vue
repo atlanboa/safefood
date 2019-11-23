@@ -6,9 +6,11 @@
 
 <script>
 export default {
-  props: ['date'],
+  props: ['data'],
   mounted(){
-      window.console.log(this.date)
+      //mounted 될때 비동기로 props로 받아온 data
+      // data.userid, data.date 로 사용하면 된다.
+      window.console.log(this.data)
   },
   methods : {
       close_Popup(){
