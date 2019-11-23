@@ -6,6 +6,7 @@
               <div class="container-fluid p-0">
                   <div class="row align-items-center no-gutters">
                       <div class="col-xl-5 col-lg-6">
+                        
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                   <ul id="navigation">
@@ -21,7 +22,7 @@
                                      </li>
                                       <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                           <ul class="submenu">
-                                              <li><a href="blog.html">blog</a></li>
+                                              <li><router-link to="/cart">food</router-link></li>
                                               <li><a href="single-blog.html">single-blog</a></li>
                                           </ul>
                                       </li>
@@ -101,6 +102,7 @@
       <router-view/>
     </section>
     <div>
+      
       <Footer/>
     </div>
   </div>
@@ -110,6 +112,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+// import Calendar from './components/calendar/Calendar.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -126,7 +129,8 @@ export default {
     this.$router.push('/'+'?'+this.pageIndex++)
   },
   components: {
-   Footer
+   Footer,
+   
   },methods:{
     logout() {
           this.$session.destroy();

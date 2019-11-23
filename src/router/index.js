@@ -14,6 +14,7 @@ import UpdateQNA from "../components/qna/UpdateQNA.vue";
 
 import About from '../components/about/About.vue';
 
+import Cart from '../components/cart/Cart.vue';
 // import VAnimateCss from 'v-animate-css';
 
 // Vue.use(VAnimateCss);
@@ -77,6 +78,12 @@ const routes = [
     name: "about",
     component: About,
     props:true
+
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart
 
   },
 ]
