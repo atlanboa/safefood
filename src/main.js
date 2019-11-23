@@ -6,32 +6,29 @@ import VueSession from 'vue-session'
 import VModal from 'vue-js-modal'
 import * as VueGoogleMaps from 'vue2-google-maps'
 
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
+import 'vuetify/dist/vuetify.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyC_iSYjUcj_d5Vfzwnn7akX7iYK_pciQg0',
-    libraries: 'places', // This is required if you use the Autocomplete plugin
-    // OR: libraries: 'places,drawing'
-    // OR: libraries: 'places,drawing,visualization'
-    // (as you require)
- 
-    //// If you want to set the version, you can do so:
-    // v: '3.26',
-  },
- 
-  //// If you intend to programmatically custom event listener code
-  //// (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
-  //// instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
-  //// you might need to turn this on.
-  // autobindAllEvents: false,
- 
-  //// If you want to manually install components, e.g.
-  //// import {GmapMarker} from 'vue2-google-maps/src/components/marker'
-  //// Vue.component('GmapMarker', GmapMarker)
-  //// then disable the following:
-  // installComponents: true,
+    libraries: 'places'
+  }
 })
 Vue.use(VModal, { dynamic: true })
-Vue.use(VueSession);
+Vue.use(VueSession)
+
+Vue.config.productionTip = false
+Vue.use(Vuetify);
+
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
+});
 
 Vue.config.productionTip = false
 
