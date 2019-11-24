@@ -20,18 +20,14 @@
                 <span>Delicious Food</span>
                 <h3>
                   {{food.name}}
-                  <br />{{food.maker}}
+                  <br />
+                  {{food.maker}}
                 </h3>
               </div>
-              <p>
-                {{food.material}}
-              </p>
-              <span>
-                  알러지정보 : 
-              </span>
-              <span v-for="(item, index) in allergin" :key="index">
-                  {{item}}
-              </span><br>
+              <p>{{food.material}}</p>
+              <span>알러지정보 :</span>
+              <span v-for="(item, index) in allergin" :key="index">{{item}}</span>
+              <br />
               <a href="#" class="line-button">Learn More</a>
             </div>
           </div>
@@ -119,6 +115,7 @@ export default {
       .get("api/selectByFoodCode/" + this.code)
       .then(response => {
         this.food = response.data;
+        window.console.log(this.food);
       })
       .catch(() => {
         this.errored = true;
@@ -126,10 +123,10 @@ export default {
       .finally(() => {
         this.loading = false;
         for (let j = 0; j < this.allergies.length; j++) {
-            if(this.food.material.indexOf(this.allergies[j])>-1){
-                // alert(JSON.stringify(this.allergin[j]))
-                this.allergin.push(this.allergies[j]);
-            }
+          if (this.food.material.indexOf(this.allergies[j]) > -1) {
+            // alert(JSON.stringify(this.allergin[j]))
+            this.allergin.push(this.allergies[j]);
+          }
         }
         this.chartOptions.series.data=[
         {
