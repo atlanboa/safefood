@@ -3,7 +3,7 @@
     <div class="bradcam_area breadcam_bg_1">
       <h3>니 몇일에 머 무겄농?</h3>
     </div>
-    <vc-calendar
+    <v-calendar
       is-expanded
       ref="calendar"
       :max-date="new Date()"
@@ -23,7 +23,7 @@ import Vue from "vue";
 import VCalendar from "v-calendar";
 
 Vue.use(VCalendar, {
-  componentPrefix: "vc" // Use <vc-calendar /> instead of <v-calendar />
+  // componentPrefix: "vc" // Use <vc-calendar /> instead of <v-calendar />
 });
 import DayDetail from "./DayDetail.vue";
 export default {
@@ -56,7 +56,7 @@ export default {
       var data = {
         date : convertedDate,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
-        userid : this.$session.get("jwt").id
+        userid : null
       };
 
       this.$modal.show(

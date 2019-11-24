@@ -86,6 +86,7 @@ const routes = [
     component: Cart
 
   },
+
 ]
 
 const router = new VueRouter({
