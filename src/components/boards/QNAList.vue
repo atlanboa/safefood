@@ -19,13 +19,16 @@
             </div>
         </div>
         <table class="table table-hover">
+            <thead>
             <tr>
-                <td>글번호</td>
+                <td scope="row">글번호</td>
                 <td>제목</td>
                 <td>작성자</td>
                 <td>조회수</td>
                 <td>작성시간</td>
             </tr>
+            </thead>
+            <tbody>
             <tr v-for="qna in qnas" :key="qna.no" @click="show_detail(qna.no)">
                 <td v-html="qna.no"></td>
                 <td v-html="qna.title"></td>
@@ -33,6 +36,7 @@
                 <td v-html="qna.hit"></td>
                 <td v-html="qna.time"></td>
             </tr>
+            </tbody>
         </table>
         <button class="btn btn-primary" @click="addQnA()">글쓰기</button>
     </div>

@@ -136,6 +136,7 @@ export default {
         return{
             foods:[],
             category:"maker",
+            food:{}
         }
     },
     mounted(){
@@ -152,6 +153,7 @@ export default {
                 });
         },
         show_detail(code){
+          
             this.$router.push("/foodview/"+code);
         },materialslice(material){
           return material.substr(0,100)+"...";

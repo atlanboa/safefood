@@ -51,7 +51,7 @@
                         <div v-for="(all, index) in allergies" :key="index" class="switch-wrap d-flex justify-content-between col-xl-1 col-md-3">
                             <p>{{all}}</p>
                             <div class="primary-checkbox">
-                                <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy" type="checkbox" checked>
+                                <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy" type="checkbox" checked="checked">
                                 <input v-else v-model="userall" :id="all" :value="all" class="allergy" type="checkbox">
                                 <label :for="all" ></label>
                             </div>
@@ -65,7 +65,7 @@
           </div>
         </form>
       </div>
-      <div class="col-lg-3 offset-lg-1">
+      <div  class="col-lg-3 offset-lg-1">
         
       </div>
     </div>
@@ -94,7 +94,7 @@ import http from "../../http-common";
                 }
             }
         },mounted(){
-            window.console.log(this.$session.get('jwt').allergy)
+            window.console.log(this.$session.get('jwt'))
         },methods:{
             userUpdate(){
                 window.console.log(this.user);
@@ -102,14 +102,19 @@ import http from "../../http-common";
                     this.user.allergy+=this.userall[index]+" ";
                 }
                 http
-                .put("api/updateUser",this.user)
+                .post("api/updateUser",this.user)
                 .then(response => {
                     if(response.data == true){
                         alert('수정 완료');
                     }else{
                         alert('수정 실패');
                     }
-                    this.$router.push("/userinfo"+"?" + this.pageIndex++);
+                    this.$session.get('jwt').id=this.user.id;
+                    this.$session.get('jwt').pass=this.user.pass;
+                    this.$session.get('jwt').name=this.user.name;
+                    this.$session.get('jwt').phone=this.user.phone;
+                    this.$session.get('jwt').address=this.user.address;
+                    location.href="/"//////////session 정보 변경 하는 방법좀 ...
                 })
                 .catch(() => {
                 this.errored = true;
@@ -118,6 +123,7 @@ import http from "../../http-common";
             },
             allCheck(all){
                 if(this.$session.get('jwt').allergy.indexOf(all)>-1){
+                  alert(all);
                     return true;
                 }else{
                     return false;
