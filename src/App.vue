@@ -109,8 +109,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 // import Calendar from './components/calendar/Calendar.vue'
 import 'bootstrap'
