@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div id="leftCol" class="d-flex flex-row" @click="JJimList()">
-            <div class="d-flex align-items-center justify-content-center">
-                <table class="table table-sm">
-                     <tr v-for="(f, idx) in foods" :key="idx">
-                        <td><img :src="f.img" style="width:50px; height:50px;">{{f.quantity}}</td>
-                    </tr>
-                </table>
-                <!-- <button "> 찜 목록 </button> -->
+        <div id="JJim_box" class="d-flex flex-column ">
+            <div id="leftCol" class="d-flex justify-content-center rounded" @click="JJimList()">
+                <div id="JJim_content">
+                    
+                    <table class="table table-sm">
+                        <tr v-for="(f, idx) in foods" :key="idx">
+                            <td><img :src="f.img" style="width:50px; height:50px;">{{f.quantity}}</td>
+                        </tr>
+                    </table>
+                    <!-- <button "> 찜 목록 </button> -->
+                </div>
             </div>
         </div>
         <div class="row">
@@ -80,18 +83,30 @@
 
 <style lang="scss" scoped>
     #leftCol {
-        margin-top: 30%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 11px;
+        padding: auto;
+        margin-top: 20%;
+        margin-left:15px;
         position: fixed;
         height: 300px;
-        width: 150px;
-        background-color: #DDD; 
-        font-size: 21px;
+        width: 100px;
+        background-color: white; 
+        font-size: 1em;
         overflow-y: scroll;
         z-index: 0;
+        border: 10px solid #DDD;
+        &::-webkit-scrollbar { 
+        display: none !important; // 윈도우 크롬 등
+        }
     }
-
-    #content {
-        position: relative;            
-        margin-left: 150px;
+    #JJim_content {
+        position: relative;
+        
+        // scroll
+    }
+    #JJim_box{
+        display: hidden;
     }
 </style>

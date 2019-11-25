@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <div>
+    <div class="d-flex flex-row flex-column">
+        <div class="d-flex justify-content-center">
             <input v-model="food.quantity" type="number" value="1"> 개
         </div>
+        <div class="d-flex justify-content-center p-2">
             <button href="#" class="btn btn-primary" @click="JJim(food)">찜</button>&nbsp;&nbsp;
             <button href="#" class="btn btn-primary" >추가</button>
+        </div>
     </div>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
     <div>
         <charts :options="chartOptions"></charts>    
+        {{food}}
     </div>
-
+    
 </template>
 
 <script>
@@ -32,7 +33,6 @@
             }
         },
         mounted(){
-            
         },
         methods: {
             

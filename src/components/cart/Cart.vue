@@ -84,7 +84,7 @@ export default {
       var data = {
         date: convertedDate,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
-        userid: this.$session.get("jwt").id
+        userid : this.$session.get("jwt").id,
       };
 
       this.$modal.show(
@@ -95,8 +95,8 @@ export default {
         },
         {
           name: "dynamic-modal",
-          width: "500px",
-          height: "280px",
+          width: "90%",
+          height: "90%",
           draggable: true
         }
       );

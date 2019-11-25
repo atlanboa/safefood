@@ -110,7 +110,9 @@
     <div>
       
       <Footer/>
+      
     </div>
+    <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
   </div>
 </template>
 
@@ -186,5 +188,10 @@ export default {
 </script>
 
 <style>
-
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+}
 </style>
