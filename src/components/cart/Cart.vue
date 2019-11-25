@@ -52,6 +52,7 @@ export default {
       var convertedDate = this.date_to_str(date);
 
       window.console.log(convertedDate);
+      window.console.log(this.$session.get('jwt').id);
 
       var data = {
         date : convertedDate,
@@ -62,7 +63,7 @@ export default {
       this.$modal.show(
         DayDetail,
         {
-          text: data,
+          data: data,
           modal: this.$modal
         },
         {

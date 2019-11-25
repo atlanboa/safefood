@@ -17,19 +17,22 @@ export default {
   mounted() {
     //mounted 될때 비동기로 props로 받아온 data
     // data.userid, data.date 로 사용하면 된다.
-    window.console.log(this.data);
+    window.console.log(this.data);  
     http
       .post("/api/daydetail", {
         id: this.data.userid,
         time: this.data.date
       })
-      .then(response => (this.userintake = response.data))
+      .then(response => {this.userintake = response.data
+      window.console.log("response.data :::::::: "+response.data)})
       .catch(() => {
         this.errored = true;
       })
       .finally(() => {
         this.loading = false;
       });
+
+    
   },
   data() {
     return {
