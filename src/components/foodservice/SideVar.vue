@@ -1,15 +1,17 @@
 <template>
-    <div>
+    <div  id="sidevar">
         <div id="JJim_box" class="d-flex flex-column ">
             <div id="leftCol" class="d-flex justify-content-center rounded" @click="JJimList()">
                 <div id="JJim_content">
-                    
                     <table class="table table-sm">
                         <tr v-for="(f, idx) in foods" :key="idx">
-                            <td><img :src="f.img" style="width:50px; height:50px;">{{f.quantity}}</td>
+                            <td >
+                                <img :src="f.img" style="width:50px; height:50px;">
+                                <div v-html="f.quantity" style="text-align: center;"></div>
+                                <!-- :style="{backgroundImage:url(f.img)}" -->
+                            </td>
                         </tr>
                     </table>
-                    <!-- <button "> 찜 목록 </button> -->
                 </div>
             </div>
         </div>
@@ -23,6 +25,7 @@
     import JJimList from "./JJimList.vue";
     export default {
         name:"sidevar",
+        props:["componentKey"],
         data(){
             return{
                 allFood: {
@@ -44,25 +47,34 @@
                 foods:[]
             }
             
-        },mounted(){
-            let food = null;
-            for (let i = 0; i < localStorage.length; i++){
-                if(!Number(localStorage.key(i)))continue;
-                food = JSON.parse(localStorage.getItem(localStorage.key(i)));
-                this.foods.push(food);
-                this.allFood.supportpereat += food.supportpereat*food.quantity;
-                this.allFood.calory += food.calory*food.quantity;
-                this.allFood.carbo += food.carbo*food.quantity;
-                this.allFood.protein += food.protein*food.quantity;
-                this.allFood.fat += food.fat*food.quantity;
-                this.allFood.sugar += food.sugar*food.quantity;
-                this.allFood.natrium += food.natrium*food.quantity;
-                this.allFood.chole += food.chole*food.quantity;
-                this.allFood.fattyacid += food.fattyacid*food.quantity;
-                this.allFood.transfat += food.transfat*food.quantity;
-            }
+        },created(){
+            this.$EventBus.$on('click-icon', () => {
+                this.start();
+            });
+        },
+        mounted(){
+            this.start();
         }
         ,methods: {
+            start(){
+                let food = null;
+                this.foods=[];
+                for (let i = 0; i < localStorage.length; i++){
+                    if(!Number(localStorage.key(i)))continue;
+                    food = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                    this.foods.push(food);
+                    this.allFood.supportpereat += food.supportpereat*food.quantity;
+                    this.allFood.calory += food.calory*food.quantity;
+                    this.allFood.carbo += food.carbo*food.quantity;
+                    this.allFood.protein += food.protein*food.quantity;
+                    this.allFood.fat += food.fat*food.quantity;
+                    this.allFood.sugar += food.sugar*food.quantity;
+                    this.allFood.natrium += food.natrium*food.quantity;
+                    this.allFood.chole += food.chole*food.quantity;
+                    this.allFood.fattyacid += food.fattyacid*food.quantity;
+                    this.allFood.transfat += food.transfat*food.quantity;
+                }
+            },
             JJimList(){
                 this.$modal.show(
                     JJimList,
@@ -76,8 +88,12 @@
                         height: "90%",
                     }
                 );
+            },
+            forceRerender() {
+                this.componentKey += 1;
             }
         },
+
     }
 </script>
 
@@ -100,6 +116,7 @@
         &::-webkit-scrollbar { 
         display: none !important; // 윈도우 크롬 등
         }
+        
     }
     #JJim_content {
         position: relative;
@@ -107,6 +124,7 @@
         // scroll
     }
     #JJim_box{
-        display: hidden;
+        cursor: pointer;
     }
+    @media screen and (max-width: 1100px) { #sidevar { display: none; } }
 </style>

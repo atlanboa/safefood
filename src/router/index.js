@@ -13,6 +13,10 @@ import QNAView from "../components/qna/QNAView.vue";
 import AddQNA from "../components/qna/AddQNA.vue";
 import UpdateQNA from "../components/qna/UpdateQNA.vue";
 
+import Notice from "../components/boards/NoticeList.vue"
+import NoticeView from "../components/boards/NoticeView.vue"
+import AddNotice from "../components/boards/AddNotice.vue"
+
 import About from '../components/about/About.vue';
 
 import Cart from '../components/cart/Cart.vue';
@@ -79,6 +83,21 @@ const routes = [
       name: "updateqna",
       component: UpdateQNA,
       props:true
+  },
+  {
+    path: "/addnotice",
+    name: "addnotice",
+    component: AddNotice
+  },
+  {
+    path: "/noticeview/:no",
+    name: "noticeview",
+    component: NoticeView
+  },
+  {
+    path: "/notice",
+    name: "notice",
+    component: Notice
   },
   {
     path: "/about",

@@ -7,7 +7,7 @@
     <div class="container">
     <div class="row">
       <div class="col-12">
-        <h2 class="contact-title">SignUP</h2>
+        <h2 class="contact-title">Update</h2>
       </div>
       <div class="col-lg-8">
         <form class="form-contact contact_form" method="post" id="contactForm" novalidate="novalidate" @submit.passive="userUpdate">
@@ -65,8 +65,8 @@
           </div>
         </form>
       </div>
-      <div  class="col-lg-3 offset-lg-1">
-        
+      <div  class="col-lg-3 offset-lg-1" id="sideimg">
+        <img src="img/backgroundfoodimg/update_side_bg.jpg">
       </div>
     </div>
     </div>
@@ -134,5 +134,12 @@ import http from "../../http-common";
 </script>
 
 <style lang="scss" scoped>
-
+  #sideimg{
+    overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 600px;
+  }
 </style>

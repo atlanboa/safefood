@@ -20,19 +20,21 @@
                                       <li>
                                         <router-link to="/about">About</router-link>
                                      </li>
-                                      <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                      <li><a href="#">boards <i class="ti-angle-down"></i></a>
+                                          <ul class="submenu">
+                                            <li><router-link to="/notice">Notice</router-link></li>
+                                            <li><router-link to="/qna">Free</router-link></li>
+                                            <li><router-link to="/qna">Q&amp;A</router-link></li>
+                                          </ul>
+                                      </li>
+                                      <li v-if="valid()"><a href="#">User<i class="ti-angle-down"></i></a>
                                           <ul class="submenu">
                                               <li><router-link to="/cart">food</router-link></li>
                                               <li><a href="single-blog.html">single-blog</a></li>
                                           </ul>
                                       </li>
-                                      <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                          <ul class="submenu">
-                                              <li><a href="elements.html">elements</a></li>
-                                          </ul>
-                                      </li>
                                       <li>
-                                        <router-link to="/qna">Q&amp;A</router-link>
+                                        
                                       </li>
                                   </ul>
                               </nav>
@@ -50,7 +52,7 @@
                               <div class="socail_links">
                                   <ul>
                                     <li>
-                                      <router-link to="/signup"><img class="fa" src="img/signup.png" width="50px" height="20%"></router-link>
+                                      <router-link to="/signup" v-if="!valid()"><img class="fa" src="img/signup.png" width="50px" height="20%"></router-link>
                                     </li>
                                     <li>
                                       <a href="#">
