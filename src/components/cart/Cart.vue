@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="bradcam_area breadcam_bg_1">
-      <h3>니 몇일에 머 무겄농?</h3>
+      <div>
+        <img src="img/whatdidyoueat.png" alt="" srcset="">
+      </div>
     </div>
     <div>
       <v-calendar
@@ -38,61 +40,10 @@ export default {
   name: "cart",
   mounted() {
     http
-      .get("/api/cart/" + this.$session.get("jwt").id)
+      // .get("/api/cart/" + this.$session.get("jwt").id)
+      .get("/api/cart/"+"ssafy")
       .then(response => {
-        this.intakes = response.data;
-        this.timeTable = [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ];
-
-        window.console.log(" 나와야 합니다 :  " + this.intakes);
-        //사용자 섭취 알고리즘 파트
-        this.intakes.forEach(function(intake) {
-          window.console.log(" 나와야 합니다 :  " + intake.time);
-
-          this
-            .timeTable[(intake.time - 2 < 0 ? (intake.time - 2) * -1 : intake.time - 2) % 24]++;
-          this
-            .timeTable[(intake.time - 1 < 0 ? (intake.time - 1) * -1 : intake.time - 1) % 24]++;
-          this.timeTable[intake.time % 24]++;
-          this.timeTable[(intake.time + 1) % 24]++;
-          this.timeTable[(intake.time + 2) % 24]++;
-        }); //forEach
-
-        var maxInx = 0;
-
-        this.timeTable.forEach(function(table, index) {
-          window.console.log(table+" "+index)
-          if (this.timeTable[maxInx] < table) {
-            maxInx = index;
-          }
-        }); //timeTable forEach
-
-        this.maxIntakeTime = maxInx;
-        window.console.log("니가 많이 처먹는 시간은 : " + this.maxIntakeTime);
+        this.maxIntakeTime = response.data;
       })
       .catch(() => {
         this.errored = true;
@@ -110,8 +61,8 @@ export default {
           dates: new Date()
         }
       ],
-      intakes: [],
-      timeTable: [],
+      
+      
       maxIntakeTime: null
     };
   },
