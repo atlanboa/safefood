@@ -3,7 +3,9 @@
     <SideVar></SideVar>
 
     <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/foodlist_top_bg_1.jpg);">
-      <h3>Food List</h3>
+      <div>
+        <img src="img/seewhatyouwant.png" alt="" srcset="">
+      </div>
     </div>
     <!-- bradcam_area_end -->
 
