@@ -2,7 +2,7 @@
   <div id="content">
     <SideVar></SideVar>
 
-    <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/foodlist_top_bg_1.jpg);">
+    <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/foodlist_top_bg_1.jpg);">
       <div>
         <img src="img/seewhatyouwant.png" alt="" srcset="">
       </div>
@@ -50,24 +50,26 @@
           <div class="col-xl-12">
             <div class="section_title text-center mb-100">
               <h3>FoodList</h3>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
+              <br>
+              <br>
+              <br>
+              <div class="input-group mb-3 d-flex flex-column ">
+                <div class="input-group-prepend d-flex justify-content-center">
                   <select v-model="category" class="selectpicker">
                     <option value="name">상품명</option>
                     <option value="maker">제조사</option>
                     <option value="material">원재료</option>
                   </select>
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search......"
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
-                  v-model="searchText"
-                  @keyup.enter="search"
-                />
-                <div class="input-group-append">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search......"
+                    aria-label="Recipient's username"
+                    aria-describedby="basic-addon2"
+                    v-model="searchText"
+                    @keyup.enter="search"
+                    style="max-width:50%;"
+                  />
                   <button class="btn btn-outline-secondary" @click="search" type="button">검색</button>
                 </div>
               </div>
@@ -83,11 +85,11 @@
               <h4 class="item_title">
                 {{food.name}}
               </h4>
-              <h4 class="item_maker">
+              <h6 class="item_maker" style="font-size:12px;">
                 {{food.maker}}
-              </h4>
+              </h6>
             </div>
-            <AddIngestion :food="food" :update="localstorageAdd" :componentKey="componentKey"></AddIngestion>
+            <AddIngestion :food="food"></AddIngestion>
           </div>
         </div>
       </div>
@@ -165,6 +167,8 @@ export default {
     },
     localstorageAdd(){
       this.componentKey++;
+    },updateJJim(code){
+      alert("고찌당"+code);
     }
   }
 };
@@ -172,6 +176,7 @@ export default {
 
 <style lang="scss" scoped>
 #content {
+  
   position: relative;
 }
 .item_title{
@@ -183,5 +188,7 @@ export default {
 .item_information{
   cursor: pointer;
 }
-
+.item_information:hover{
+  opacity: 0.5;
+}
 </style>

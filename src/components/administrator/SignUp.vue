@@ -47,11 +47,20 @@
                     Allergies
                 </div>
                 <div class="form-group">
-                    <label class="form-check-label" v-for="(all, index) in allergies" :key="index">
+                  <div class="row" >
+                        <div v-for="(all, index) in allergies" :key="index" class="switch-wrap d-flex justify-content-between col-xl-1 col-md-3">
+                            <p>{{all}}</p>
+                            <div class="confirm-checkbox">
+                                <input v-model="userall" :id="all" :value="all" class="allergy" type="checkbox">
+                                <label :for="all" ></label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <label class="form-check-label" v-for="(all, index) in allergies" :key="index">
                       <input v-model="userall" :id="all" :value="all" class="allergy" type="checkbox"/>{{all}}
                       <br v-if="index%4==0">
                     </label>
-                <input class="form-control" name="address" id="address" type="text" placeholder="Enter Address"/>
+                  <input class="form-control" name="address" id="address" type="text" placeholder="Enter Address"/> -->
               </div>
             </div>
           </div>
@@ -60,7 +69,7 @@
           </div>
         </form>
       </div>
-      <div class="col-lg-3 offset-lg-1">
+      <div class="col-lg-3 offset-lg-1" id="sideimg">
         <img src="img/backgroundfoodimg/signupImg.jpg">
       </div>
     </div>
@@ -107,11 +116,17 @@ export default {
       });
       this.$router.push('/')
     }
-    
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
+  #sideimg{
+    overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 600px;
+  }
 </style>

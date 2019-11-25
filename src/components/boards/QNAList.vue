@@ -3,15 +3,15 @@
         <br>
         <h1>Q &amp; A</h1>
         <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                    {{category}}
-                    </button>
-                    <div class="dropdown-menu">
-                        <div @click="categoryChange('제목')">제목</div>
-                        <div @click="categoryChange('작성자')">작성자</div>
-                        <div @click="categoryChange('내용')">내용</div>
-                    </div>
+            <div class="input-group-prepend">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                {{category}}
+                </button>
+                <div class="dropdown-menu">
+                    <div @click="categoryChange('제목')">제목</div>
+                    <div @click="categoryChange('작성자')">작성자</div>
+                    <div @click="categoryChange('내용')">내용</div>
+                </div>
             </div>
             <input type="text" class="form-control" placeholder="Search......" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="searchText" @keyup="search">
             <div class="input-group-append">

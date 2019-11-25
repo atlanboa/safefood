@@ -7,6 +7,7 @@ import VModal from 'vue-js-modal'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import HighchartsVue from "highcharts-vue";
 
+Vue.prototype.$EventBus = new Vue();
 Vue.use(HighchartsVue, { tagName: "charts" });
 Vue.use(VueGoogleMaps, {
   load: {
