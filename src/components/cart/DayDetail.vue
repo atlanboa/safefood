@@ -32,7 +32,16 @@ export default {
 	private int code;
 	private String img;
 	private int count;
-	private double carlories;
+	protected double supportpereat;
+	protected double calory
+	protected double carbo;
+	protected double protein;
+	protected double fat;
+	protected double sugar;
+	protected double natrium;
+	protected double chole	
+	protected double fattyacid;
+	protected double transfat;
 	private String time;
 
       */
