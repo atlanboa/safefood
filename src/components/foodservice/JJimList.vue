@@ -5,19 +5,19 @@
         <button class="genric-btn danger" @click="close_Popup">섭취 식품으로 등록</button>
         <button class="genric-btn danger" @click="myIngestionInfo">내정보로 이동</button>
         </div>
-        <div class="d-flex justify-content-center">
-            <table class="table table-sm " style="max-height:50%">
+        <div class="container">
+            <table class="table table-sm text-center">
                 <tr>
                     <th>상품이름</th>
                     <th>상품갯수</th>
                     <th>삭제할 상품 갯수</th>
-                    
                 </tr>
                 <tr v-for="(f, idx) in foods" :key="idx">
 
                     <td>{{f.name}}</td>
                     <td>{{f.quantity}}</td>
-                    <td><input type="number">
+                    <td>
+                        <input type="number">
                         <a href="#">
                             <i class="fa fa-trash fa-2x"></i> 
                         </a>

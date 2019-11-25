@@ -1,21 +1,20 @@
 <template>
-    <div>
+    <div  id="sidevar">
         <div id="JJim_box" class="d-flex flex-column ">
             <div id="leftCol" class="d-flex justify-content-center rounded" @click="JJimList()">
                 <div id="JJim_content">
-                    
                     <table class="table table-sm">
                         <tr v-for="(f, idx) in foods" :key="idx">
                             <td><img :src="f.img" style="width:50px; height:50px;">{{f.quantity}}</td>
                         </tr>
                     </table>
-                    <!-- <button "> 찜 목록 </button> -->
                 </div>
             </div>
         </div>
         <div class="row">
             <modals-container />
         </div>
+        <component-to-re-render :key="componentKey" />
     </div>
 </template>
 
@@ -23,6 +22,8 @@
     import JJimList from "./JJimList.vue";
     export default {
         name:"sidevar",
+        props:["componentKey"],
+
         data(){
             return{
                 allFood: {
@@ -76,8 +77,12 @@
                         height: "90%",
                     }
                 );
+            },
+            forceRerender() {
+                this.componentKey += 1;
             }
         },
+
     }
 </script>
 
@@ -87,7 +92,7 @@
         padding-bottom: 10px;
         padding-right: 11px;
         padding: auto;
-        margin-top: 20%;
+        margin-top: 40%;
         margin-left:15px;
         position: fixed;
         height: 300px;
@@ -109,4 +114,5 @@
     #JJim_box{
         display: hidden;
     }
+    @media screen and (max-width: 1100px) { #sidevar { display: none; } }
 </style>

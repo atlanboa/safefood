@@ -80,11 +80,12 @@
               </div>
               <h4 class="item_title">
                 {{food.name}}
-                </h4><h4 class="item_maker">
+              </h4>
+              <h4 class="item_maker">
                 {{food.maker}}
               </h4>
             </div>
-            <AddIngestion :food="food"></AddIngestion>
+            <AddIngestion :food="food" :update="localstorageAdd" :componentKey="componentKey"></AddIngestion>
           </div>
         </div>
       </div>
@@ -104,6 +105,7 @@ export default {
   order: 2,
   data() {
     return {
+      componentKey:0,
       searchText:'',
       food: {},
       foods: [],
@@ -158,6 +160,9 @@ export default {
        .finally(() => {this.loading = false; window.console.log(this.foods);
        });
       }
+    },
+    localstorageAdd(){
+      this.componentKey++;
     }
   }
 };
@@ -176,4 +181,5 @@ export default {
 .item_information{
   cursor: pointer;
 }
+
 </style>

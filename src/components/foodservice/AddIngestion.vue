@@ -4,8 +4,8 @@
             <input v-model="food.quantity" type="number" value="1"> 개
         </div>
         <div class="d-flex justify-content-center p-2">
-            <button href="#" class="btn btn-primary" @click="JJim(food)">찜</button>&nbsp;&nbsp;
-            <button href="#" class="btn btn-primary" >추가</button>
+            <button class="btn btn-primary" @click="JJim(food)">찜</button>
+            <button class="btn btn-primary" >추가</button>
         </div>
     </div>
 </template>
@@ -17,11 +17,18 @@
         mounted(){
             
         },
+        data(){
+            return{
+
+            }
+        },
         methods: {
             JJim(inputFood){
+                
                 if(inputFood.quantity==null||inputFood.quantityL<0){
                     alert("찜갯수를 정하지 않았습니다.")
                 }else{
+                    this.$emit('update');
                     let localValue = localStorage.getItem(inputFood.code);
                     alert(this.food.name+" "+this.food.quantity+"개 추가 완료")
                     if(localValue){
@@ -34,7 +41,8 @@
                     );
                     this.food.quantity=0;
                 }
-            }
+            },
+            
         },
     }
 </script>
