@@ -18,16 +18,18 @@
         <div>
             <!-- <button @click="totalFoodInfo">show graph</button> -->
             <charts :options="chartOptions"></charts>
+            <Graph :food="allFood"></Graph>
         </div>
         
     </div>
 </template>
 
 <script>
+import Graph from "./Graph.vue";
     export default {
         props: ['text'],
         components:{
-            
+            Graph
         },
         data(){
             return{
@@ -85,6 +87,7 @@
                 this.allFood.fattyacid += food.fattyacid*food.quantity;
                 this.allFood.transfat += food.transfat*food.quantity;
             }
+            alert(JSON.stringify(this.foods));
             window.console.log(this.allFood)
             this.chartOptions.series.data=[
                 {

@@ -55,17 +55,6 @@
                     <option value="maker">제조사</option>
                     <option value="material">원재료</option>
                   </select>
-
-                  <!-- <button
-                    type="button"
-                    class="btn btn-outline-secondary dropdown-toggle"
-                    data-toggle="dropdown"
-                  >{{category}}</button>
-                  <div class="dropdown-menu">
-                    <div >제목</div>
-                    <div >작성자</div>
-                    <div >내용</div>
-                  </div> -->
                 </div>
                 <input
                   type="text"

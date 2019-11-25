@@ -56,7 +56,7 @@ export default {
       var data = {
         date : convertedDate,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
-        userid : null
+        userid : this.$session.get("jwt").id,
       };
 
       this.$modal.show(
