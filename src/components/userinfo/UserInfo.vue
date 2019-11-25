@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/update_top_bg_1.jpg);">
       <h3>Update</h3>
     </div>
     <br>
@@ -123,7 +123,7 @@ import http from "../../http-common";
             },
             allCheck(all){
                 if(this.$session.get('jwt').allergy.indexOf(all)>-1){
-                  alert(all);
+                  // alert(all);
                     return true;
                 }else{
                     return false;

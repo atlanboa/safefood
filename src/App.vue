@@ -70,24 +70,30 @@
                                   </ul>
                               </div>
                               <div class="book_btn d-none d-lg-block">
-                                <router-link v-if="!valid()" class="popup-with-form" to="/login">Login</router-link>
+                                <!-- <router-link v-if="!valid()" class="popup-with-form" to="/login">Login</router-link> -->
                                 
-                                <a v-if="valid()">{{this.$session.get('jwt').id}}</a>
+                                <router-link to="/userinfo" v-if="valid()">{{this.$session.get('jwt').id}}</router-link>
                                 <a v-if="valid()" @click="logout">Logout</a>
                               </div>
-                              <div v-if="!valid()" class="collapse" id="collapseExample" style="z-index: 100; right: 0px; width: 250px;">
+                              <div v-if="!valid()" style="position:relative">
+                                <button class="nav-link genric-btn info small" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                  Login
+                                </button>
+                                <div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
+
                                   <div class="card card-body bg-dark" id="loginWindow">
-                                    <form>
-                                      <input type="hidden" name="command" value="login">
+                                    <form @submit="login">
                                       <label class="text-white">아이디</label><br>
-                                      <input type="text" class="form-control" name="id" id="identifier" required><br>
+                                      <input v-model="id" type="text" class="form-control" name="id" id="identifier" required><br>
                                       <label class="text-white">비밀번호</label><br>
-                                      <input type="password" class="form-control" name="pass" id="password" required><br> <br> 
-                                      <input type="button" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
+                                      <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
+                                      <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
                                     </form>
                                     <a class="btn btn-dark" href="#">비밀번호 찾기</a>
                                   </div>
                                 </div>
+                              </div>
+                              
                           </div>
                       </div>
                       <div class="col-12">
@@ -110,6 +116,7 @@
 
 <script>
 import Footer from './components/Footer.vue'
+import http from './http-common.js';
 // import Calendar from './components/calendar/Calendar.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -120,6 +127,8 @@ export default {
   name: 'app',
   data(){
     return{
+      id:"",
+      pass:"",
       pageIndex:0,
     }
   },
@@ -130,6 +139,33 @@ export default {
    Footer,
    
   },methods:{
+    login() {
+      http
+        .post("api/login", {
+          id: this.id,
+          pass: this.pass
+        })
+        .then(
+          response => {
+            if (response.status === 200 /*&& "token" in response.body*/) {
+              window.console.log("로그인 성공");
+              this.$session.start();
+              this.$session.set("jwt", response.data);
+              // this.$http.headers.common["Authorization"] =
+              //   "Bearer " + response.body.token;
+              window.console.log(this.$session.getAll());
+            }
+          },
+          function(err) {
+            window.console.log("err", err);
+          }
+        )
+        .finally(() => {
+          window.console.log();
+          
+          
+        });
+    },
     logout() {
           this.$session.destroy();
           window.console.log("로그아웃");
@@ -141,6 +177,9 @@ export default {
       } else {
         return false;
       }
+    },
+    userInfo(){
+      this.$router.push("/userinfo");
     }
   }
 }

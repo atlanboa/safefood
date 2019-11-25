@@ -28,6 +28,7 @@
               <span>알러지정보 :</span>
               <span v-for="(item, index) in allergin" :key="index">{{item}}</span>
               <br />
+              <AddIngestion :food="this.food"></AddIngestion>
               <a href="#" class="line-button">Learn More</a>
             </div>
           </div>
@@ -35,27 +36,23 @@
       </div>
       <!-- about_area_end -->
       
-      <Cal></Cal>
-<!-- 그래프 정보 -->
-      <charts :options="chartOptions"></charts>
+      <!-- 그래프 정보 -->
+      <!-- <charts :options="chartOptions"></charts> -->
+      <Graph :food="this.food" :title="this.food.name"></Graph>
     </div>
   </div>
 </template>
 
 <script>
 import http from "../../http-common";
-import Vue from "vue";
-import HighchartsVue from "highcharts-vue";
-import Cal from './Cal.vue'
-Vue.use(HighchartsVue, { tagName: "charts" });
-Cal
+import AddIngestion from "./AddIngestion.vue";
+import Graph from "./Graph.vue"
 export default {
   name: "foodview",
   props: ["code"],
-  components:{ Cal},
+  components:{ AddIngestion, Graph},
   data() {
     return {
-      
       food: {
           code:0,
           name:null,
@@ -71,6 +68,7 @@ export default {
           fattyacid:0,
           transfat:0,
           img:null,
+          quantity:0
       },
       loading: true,
       errored: false,
@@ -83,34 +81,10 @@ export default {
       chartType: "pie",
       seriesColor: "#6fcd98",
       colorInputIsSupported: null,
-      chartOptions: {
-        chart: {
-          type: "pie"
-        },
-        title: {
-          text: "Nutrition Information"
-        },
-        series: 
-          {
-            name:'양',
-            colorByPoint:true,
-            data: [
-                
-
-
-            ],
-            color: "#6fcd98"
-          }
-        
-      }
-
-
-
 
     };
   },
-  mounted() {
-    // alert(JSON.stringify(this.food))
+  created() {
     http
       .get("api/selectByFoodCode/" + this.code)
       .then(response => {
@@ -128,48 +102,7 @@ export default {
             this.allergin.push(this.allergies[j]);
           }
         }
-        this.chartOptions.series.data=[
-        {
-          name:'칼로리',
-          y:this.food.calory,
-          },
-          {
-          name:'탄수화물',
-          y:this.food.carbo,
-          },
-          {
-          name:'단백질',
-          y:this.food.protein,
-          },
-          {
-          name:'지방',
-          y:this.food.fat,
-          },
-          {
-          name:'당류',
-          y:this.food.sugar,
-          },
-          {
-          name:'나트륨',
-          y:this.food.natrium,
-          },
-          {
-          name:'콜레스테롤',
-          y:this.food.chole,
-          },
-          {
-          name:'포화지방산',
-          y:this.food.fattyacid,
-          },
-          {
-          name:'트렌스지방',
-          y:this.food.transfat,
-          },
-
-      ]
       });
-      
-
   },
   methods: {
     
