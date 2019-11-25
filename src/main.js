@@ -5,7 +5,9 @@ import store from './store'
 import VueSession from 'vue-session'
 import VModal from 'vue-js-modal'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import HighchartsVue from "highcharts-vue";
 
+Vue.use(HighchartsVue, { tagName: "charts" });
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyC_iSYjUcj_d5Vfzwnn7akX7iYK_pciQg0',

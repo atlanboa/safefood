@@ -1,7 +1,40 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
-      <h3>MainPage</h3>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="img/banner/banner.png" alt="First slide" />
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/banner/banner2.png" alt="Second slide" />
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/banner/banner.png" alt="Third slide" />
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
     <!-- <div class="slider_area">
       <div class="slider_active owl-carousel">
@@ -54,7 +87,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>-->
 
     <div class="about_area">
       <div class="container">
@@ -64,25 +97,28 @@
               <div class="section_title mb-20px">
                 <span>About Us</span>
                 <h3>
-                  A Luxuries Hotel
+                  오늘의 추천 음식
                   <br />with Nature
                 </h3>
               </div>
               <p>
-                Suscipit libero pretium nullam potenti. Interdum, blandit phasellus consectetuer dolor ornare
+                {{food1.name}}
+                <br />
+                {{food2.name}}
+                <br />Suscipit libero pretium nullam potenti. Interdum, blandit phasellus consectetuer dolor ornare
                 dapibus enim ut tincidunt rhoncus tellus sollicitudin pede nam maecenas, dolor sem. Neque
                 sollicitudin enim. Dapibus lorem feugiat facilisi faucibus et. Rhoncus.
               </p>
-              <a href="#" class="line-button">Learn More</a>
+              <button class="line-button main-to-list-button" @click="goFoodList">go food List</button>
             </div>
           </div>
           <div class="col-xl-7 col-lg-7">
             <div class="about_thumb d-flex">
-              <div class="img_1">
-                <img src="img/about/about_1.png" alt />
+              <div class="img_1" @click="goFood(food1.code)">
+                <img class="main_page_images" :src="food1.img" alt />
               </div>
-              <div class="img_2">
-                <img src="img/about/about_2.png" alt />
+              <div class="img_2" @click="goFood(food2.code)">
+                <img class="main_page_images" :src="food2.img" alt />
               </div>
             </div>
           </div>
@@ -90,18 +126,96 @@
       </div>
     </div>
     <!-- about_area_end -->
-
-
   </div>
 </template>
 
 <script>
+import http from "../../http-common";
 export default {
-  name: "mainpage"
+  name: "mainpage",
+  data() {
+    return {
+      food1: {
+        code: 0,
+        name: null,
+        material: null,
+        supportpereat: 0,
+        calory: 0,
+        carbo: 0,
+        protein: 0,
+        fat: 0,
+        sugar: 0,
+        natrium: 0,
+        chole: 0,
+        fattyacid: 0,
+        transfat: 0,
+        img: null,
+        quantity: 0
+      },
+      food2: {
+        code: 0,
+        name: null,
+        material: null,
+        supportpereat: 0,
+        calory: 0,
+        carbo: 0,
+        protein: 0,
+        fat: 0,
+        sugar: 0,
+        natrium: 0,
+        chole: 0,
+        fattyacid: 0,
+        transfat: 0,
+        img: null,
+        quantity: 0
+      }
+    };
+  },
+  mounted() {
+    http
+      .get("api/selectByFoodCode/" + 1)
+      .then(response => {
+        this.food1 = response.data;
+        window.console.log(this.food1);
+      })
+      .catch(() => {
+        this.errored = true;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+    http
+      .get("api/selectByFoodCode/" + 2)
+      .then(response => {
+        this.food2 = response.data;
+        window.console.log(this.food2);
+      })
+      .catch(() => {
+        this.errored = true;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+  },
+  methods: {
+    goFood(code) {
+      this.$router.push("/foodview/" + code);
+    },
+    goFoodList() {
+      this.$router.push("/foodlist");
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-
-
+<style>
+.main_page_images {
+  width: 284px;
+  height: 284px;
+}
+.main-to-list-button {
+  background-color: white;
+  border: 0;
+  outline: 0;
+}
 </style>

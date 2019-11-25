@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/signup_top_bg_2.jpg);">
       <h3>SignUP</h3>
     </div>
     <br>
@@ -61,7 +61,7 @@
         </form>
       </div>
       <div class="col-lg-3 offset-lg-1">
-        
+        <img src="img/backgroundfoodimg/signupImg.jpg">
       </div>
     </div>
     </div>
@@ -113,4 +113,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

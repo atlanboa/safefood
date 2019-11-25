@@ -1,5 +1,5 @@
 <template>
-  <div class="example-modal-content" @click="close_Popup">
+  <div class="example-modal-content">
     <h1>{{text.name}}, {{text.age}}</h1>
     <p>Program Languages : {{ text.main_language }}</p>
     <p>SangSung Software Level : {{ text.main_language }}</p>
