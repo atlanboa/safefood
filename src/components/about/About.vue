@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bradcam_area breadcam_bg_1">
-      <h3>About</h3>
+      <img src="img/about.png" alt="" srcset="">
     </div>
     <!-- <div class="slider_area">
       <div class="slider_active owl-carousel">
