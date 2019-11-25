@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bradcam_area breadcam_bg_1">
-      <h3>SignUP</h3>
+      <div><img src="img/signuppage.png" alt=""></div>
     </div>
     <br />
     <div class="container">

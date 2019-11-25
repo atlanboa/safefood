@@ -1,15 +1,24 @@
 <template>
   <div>
     <div class="bradcam_area breadcam_bg_1">
-      <h3>니 몇일에 머 무겄농?</h3>
+      <div>
+        <img src="img/whatdidyoueat.png" alt="" srcset="">
+      </div>
     </div>
-    <v-calendar
-      is-expanded
-      ref="calendar"
-      :max-date="new Date()"
-      :attributes="attrs"
-      @dayclick="click()"
-    />
+    <div>
+      <v-calendar
+        is-expanded
+        ref="calendar"
+        :max-date="new Date()"
+        :attributes="attrs"
+        is-dark
+        @dayclick="click()"
+      />
+    </div>
+    <div>
+      <h2>분석 사항</h2>
+      <h1>가장 많이 먹는 시간대는 말이져 : {{this.maxIntakeTime}}</h1>
+    </div>
 
     <!-- popup layer -->
     <div class="row">
@@ -21,6 +30,7 @@
 <script>
 import Vue from "vue";
 import VCalendar from "v-calendar";
+import http from "../../http-common";
 
 Vue.use(VCalendar, {
   // componentPrefix: "vc" // Use <vc-calendar /> instead of <v-calendar />
@@ -28,6 +38,20 @@ Vue.use(VCalendar, {
 import DayDetail from "./DayDetail.vue";
 export default {
   name: "cart",
+  mounted() {
+    http
+      // .get("/api/cart/" + this.$session.get("jwt").id)
+      .get("/api/cart/"+"ssafy")
+      .then(response => {
+        this.maxIntakeTime = response.data;
+      })
+      .catch(() => {
+        this.errored = true;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+  },
   data() {
     return {
       attrs: [
@@ -36,7 +60,10 @@ export default {
           highlight: "red",
           dates: new Date()
         }
-      ]
+      ],
+      
+      
+      maxIntakeTime: null
     };
   },
   methods: {
@@ -52,10 +79,10 @@ export default {
       var convertedDate = this.date_to_str(date);
 
       window.console.log(convertedDate);
-      window.console.log(this.$session.get('jwt').id);
+      window.console.log(this.$session.get("jwt").id);
 
       var data = {
-        date : convertedDate,
+        date: convertedDate,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
         userid : this.$session.get("jwt").id,
       };

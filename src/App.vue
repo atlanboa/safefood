@@ -50,7 +50,7 @@
                               <div class="socail_links">
                                   <ul>
                                     <li>
-                                      <router-link to="/signup">signup</router-link>
+                                      <router-link to="/signup"><img class="fa" src="img/signup.png" width="50px" height="20%"></router-link>
                                     </li>
                                     <li>
                                       <a href="#">
