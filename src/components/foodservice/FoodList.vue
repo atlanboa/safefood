@@ -73,17 +73,16 @@
           </div>
         </div>
         <div class="row">
-          <div v-for="(food, index) in foods" :key="index" class="col-xl-4 col-md-4">
-            <div class="single_offers" @click="show_detail(food.code)">
+          <div v-for="(food, index) in foods" :key="index" class="col-xl-3 col-md-3">
+            <div class="single_offers item_information" @click="show_detail(food.code)">
               <div class="about_thumb">
                 <img class="foodimg" :src="food.img" />
               </div>
-              <h4>
+              <h4 class="item_title">
                 {{food.name}}
-                <br />
+                </h4><h4 class="item_maker">
                 {{food.maker}}
               </h4>
-              <div class="overflow-hidden" style="height:100px" v-html="materialslice(food.material)"></div>
             </div>
             <AddIngestion :food="food"></AddIngestion>
           </div>
@@ -145,9 +144,6 @@ export default {
     show_detail(code) {
       this.$router.push("/foodview/" + code);
     },
-    materialslice(material) {
-      return material.substr(0, 100) + "...";
-    },
     log: function(evt) {
       window.console.log(evt);
     },
@@ -170,5 +166,14 @@ export default {
 <style lang="scss" scoped>
 #content {
   position: relative;
+}
+.item_title{
+  text-align: center;
+}
+.item_maker{
+  text-align: center;
+}
+.item_information{
+  cursor: pointer;
 }
 </style>

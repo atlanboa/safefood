@@ -1,26 +1,37 @@
 <template>
-    <div class="example-modal-content" >
-        <div>
+    <div class="example-modal-content d-flex flex-column" >
+        <div class="d-flex justify-content-center">
         <button class="genric-btn danger" @click="close_Popup">닫기</button>
         <button class="genric-btn danger" @click="close_Popup">섭취 식품으로 등록</button>
         <button class="genric-btn danger" @click="myIngestionInfo">내정보로 이동</button>
         </div>
-        <table class="table table-sm">
-            <tr>
-                <th>상품이름</th>
-                <th>상품갯수</th>
-            </tr>
-            <tr v-for="(f, idx) in foods" :key="idx">
-                <td>{{f.name}}</td>
-                <td>{{f.quantity}}</td>
-            </tr>
-        </table>
+        <div class="d-flex justify-content-center">
+            <table class="table table-sm " style="max-height:50%">
+                <tr>
+                    <th>상품이름</th>
+                    <th>상품갯수</th>
+                    <th>삭제할 상품 갯수</th>
+                    
+                </tr>
+                <tr v-for="(f, idx) in foods" :key="idx">
+
+                    <td>{{f.name}}</td>
+                    <td>{{f.quantity}}</td>
+                    <td><input type="number">
+                        <a href="#">
+                            <i class="fa fa-trash fa-2x"></i> 
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div>
+            <mdb-icon fab icon="500px" />
             <!-- <button @click="totalFoodInfo">show graph</button> -->
             <charts :options="chartOptions"></charts>
             <Graph :food="allFood"></Graph>
         </div>
-        
+         
     </div>
 </template>
 
@@ -87,7 +98,7 @@ import Graph from "./Graph.vue";
                 this.allFood.fattyacid += food.fattyacid*food.quantity;
                 this.allFood.transfat += food.transfat*food.quantity;
             }
-            alert(JSON.stringify(this.foods));
+            // alert(JSON.stringify(this.foods));
             window.console.log(this.allFood)
             this.chartOptions.series.data=[
                 {
@@ -190,5 +201,5 @@ import Graph from "./Graph.vue";
 </script>
 
 <style lang="scss" scoped>
-
+    
 </style>

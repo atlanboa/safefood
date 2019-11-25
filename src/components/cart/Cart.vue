@@ -68,8 +68,8 @@ export default {
         },
         {
           name: "dynamic-modal",
-          width: "500px",
-          height: "280px",
+          width: "90%",
+          height: "90%",
           draggable: true
         }
       );
