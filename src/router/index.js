@@ -92,7 +92,8 @@ const routes = [
   {
     path: "/noticeview/:no",
     name: "noticeview",
-    component: NoticeView
+    component: NoticeView,
+    props:true
   },
   {
     path: "/notice",

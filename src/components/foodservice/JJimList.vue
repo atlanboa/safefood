@@ -40,7 +40,7 @@
                         <td>{{page.name}}</td>
                         <td>{{page.quantity}}</td>
                         <td>
-                            <button @click="delete_JJim(page.code)">
+                            <button class="trash_button" @click="delete_JJim(page.code)">
                                 <i class="fa fa-trash fa-2x"></i> 
                             </button>
                         </td>
@@ -285,6 +285,10 @@
     }
     #jjim_list_table{
         height: 10px;
+    }
+    .trash_button{
+        background:white;
+        border:0;
     }
 }
 </style>
