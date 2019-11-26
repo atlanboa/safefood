@@ -55,6 +55,7 @@
                                 <label :for="all" ></label>
                             </div>
                         </div> -->
+                        {{user.allergy}}
                         <div v-for="(all, index) in allergies" :key="index" class="col-3">
                           <span class="custom-control custom-checkbox">
                             <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox" checked="checked">

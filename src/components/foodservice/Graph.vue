@@ -1,6 +1,7 @@
 <template>
     <div>
         <charts :options="chartOptions"></charts>    
+        <!-- {{food}} -->
     </div>
     
 </template>
@@ -13,11 +14,13 @@
             return{
                 chartOptions: {
                     chart: {
-                    type: "pie"
+                    type: "pie",
+                    height:400,
                     },
                     title: {
                     text: "Nutrition Information"
                     },
+                    
                     tooltip: {
                         pointFormat: '<b>{point.percentage:.1f}%</b>'
                     },
@@ -33,11 +36,13 @@
         },
         mounted(){
         },
-        methods: {
-            
+        created(){
+            this.$EventBus.$on('update_graph_value', () => {
+                this.graphUpdate();
+            });
         },
-        watch:{
-            food(){
+        methods: {
+            graphUpdate(){
                 this.chartOptions.series.data=[
                     {
                     name:'칼로리',
@@ -77,7 +82,7 @@
                     },
                 ]
             }
-        }
+        },
     }
 </script>
 

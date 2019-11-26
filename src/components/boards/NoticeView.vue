@@ -31,7 +31,7 @@
             <th>{{notice.hit}}</th>
           </tr>
           <tr>
-            <th>시간</th>
+            <th>작성시간</th>
             <th>{{notice.time}}</th>
           </tr>
       </tbody>

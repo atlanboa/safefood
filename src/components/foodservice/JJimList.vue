@@ -7,15 +7,15 @@
         </div>
         <div class="d-flex justify-content-center">
         <button class="genric-btn danger" @click="close_Popup">닫기</button>
-        <button class="genric-btn danger" @click="close_Popup">섭취 식품으로 등록</button>
+        <button class="genric-btn danger" @click="JJim_to_Cart">섭취 식품으로 등록</button>
         <button class="genric-btn danger" @click="myIngestionInfo">내정보로 이동</button>
         </div>
         <br>
         <div class="row">
             <div class="col-7">
                 <!-- <button @click="totalFoodInfo">show graph</button> -->
-                <charts :options="chartOptions"></charts>
-                <!-- <Graph :food="allFood"></Graph> -->
+                <!-- <charts :options="chartOptions"></charts> -->
+                <Graph :food="allFood"></Graph>
             </div>
             <div class="container col-5" id="jjim_list_table">
                 <table class="table table-sm text-center">
@@ -25,22 +25,12 @@
                         <th>상품갯수</th>
                         <th>삭제</th>
                     </tr>
-                    <!-- <tr v-for="(f, idx) in foods" :key="idx">
-                        <td>{{f.name}}</td>
-                        <td>{{f.quantity}}</td>
+                    <tr v-for="view in pageViewList" :key="view">
+                        <td><img :src="view.img" style="width:50px; height:50px;"></td>
+                        <td>{{view.name}}</td>
+                        <td>{{view.quantity}}</td>
                         <td>
-                            <input type="number">
-                            <a href="#">
-                                <i class="fa fa-trash fa-2x"></i> 
-                            </a>
-                        </td>
-                    </tr> -->
-                    <tr v-for="page in pageViewList" :key="page">
-                        <td><img :src="page.img" style="width:50px; height:50px;"></td>
-                        <td>{{page.name}}</td>
-                        <td>{{page.quantity}}</td>
-                        <td>
-                            <button class="trash_button" @click="delete_JJim(page.code)">
+                            <button class="trash_button" @click="delete_JJim(view.code)">
                                 <i class="fa fa-trash fa-2x"></i> 
                             </button>
                         </td>
@@ -52,9 +42,9 @@
                             <i class="ti-angle-left"></i>
                         </button>
                     </li>
-                    <template v-for="page in pagelength">
-                        <li class="page-item" :key="page">
-                            <button class="page-link" @click="pagenation(page)">{{page}}</button>
+                    <template v-for="view in pagelength">
+                        <li class="page-item" :key="view">
+                            <button class="page-link" @click="pagenation(view)">{{view}}</button>
                         </li>
                     </template>
                     <li class="page-item">
@@ -65,18 +55,21 @@
                 </ul>
             </div>
         </div>
-        
-        
+        <div class="stackedgraph container">
+            <StackedGraph :foods="foods"></StackedGraph>
+        </div>
         
     </div>
 </template>
 
 <script>
-//import Graph from "./Graph.vue";
+import http from "../../http-common";
+import Graph from "./Graph.vue";
+import StackedGraph from "./StackedGraph.vue"
     export default {
         props: ['text'],
         components:{
-            //Graph
+            Graph,StackedGraph
         },
         data(){
             return{
@@ -147,45 +140,10 @@
                     this.pagechoose=1;
                     this.pagenation(1);
                     // alert(JSON.stringify(this.foods));
-                    window.console.log(this.allFood)
-                    this.chartOptions.series.data=[
-                        {
-                        name:'칼로리',
-                        y:this.allFood.calory,
-                        },
-                        {
-                        name:'탄수화물',
-                        y:this.allFood.carbo,
-                        },
-                        {
-                        name:'단백질',
-                        y:this.allFood.protein,
-                        },
-                        {
-                        name:'지방',
-                        y:this.allFood.fat,
-                        },
-                        {
-                        name:'당류',
-                        y:this.allFood.sugar,
-                        },
-                        {
-                        name:'나트륨',
-                        y:this.allFood.natrium,
-                        },
-                        {
-                        name:'콜레스테롤',
-                        y:this.allFood.chole,
-                        },
-                        {
-                        name:'포화지방산',
-                        y:this.allFood.fattyacid,
-                        },
-                        {
-                        name:'트렌스지방',
-                        y:this.allFood.transfat,
-                        },
-                    ]
+                    window.console.log(this.allFood);
+                    this.$EventBus.$emit('update_graph_value');
+                    this.$EventBus.$emit('update_stackedgraph_value');
+                    //update_stackedgraph_value
                 },
                 close_Popup(){
                     this.$emit('close')
@@ -204,11 +162,11 @@
                     if(page==='next') page=this.pagechoose+1;
                     if(page<1) {
                         page=1;
-                        alert('첫 페이지 입니다.');
+                        //alert('첫 페이지 입니다.');
                     }
                     if(page>this.pagelength){
                         page=this.pagelength-1;
-                        alert('끝 페이지 입니다.');
+                        //alert('끝 페이지 입니다.');
                     }
                     this.pagechoose=page;
                     this.pageViewList=[];
@@ -220,52 +178,52 @@
                     alert(code);
                     localStorage.removeItem(code);
                     this.start();
+                },JJim_to_Cart(){
+                    let food = null;
+                    this.foods=[];
+                    for (var key in localStorage){
+                        if(!Number(key))continue;
+                        food = JSON.parse(localStorage.getItem(key));
+                        localStorage.removeItem(key);
+                        this.foods.push(food);
+                    }
+                    this.intake(this.foods);
+                    this.start();
+                    this.$EventBus.$emit('click-icon');
+                },
+                intake(foods){
+                    if(this.$session.exists()){
+                        
+                        const today = new Date();
+                        let todayDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "
+                                +today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                        let cartlist=[];
+                        for (let i = 0; i < foods.length; i++) {
+                            cartlist.push({
+                                id: this.$session.get('jwt').id,
+                                code:foods[i].code,
+                                count:Number(foods[i].quantity),
+                                time:todayDate,
+                            });
+                        }
+                        
+                        alert(JSON.stringify(cartlist));
+                        http
+                            .post("/api/daydetail/insert", cartlist)
+                            .then(() => {
+                                alert("추가 하였습니다.");
+                            })
+                            .catch(() => {
+                            this.errored = true;
+                            })
+                            .finally(() => {
+                    });
+                }else{
+                    alert("로그인을 먼저 하세요!");
                 }
-        },computed:{
-            
-        },
-        watch:{
-            allFood(){
-                this.chartOptions.series.data=[
-                    {
-                    name:'칼로리',
-                    y:this.allFood.calory,
-                    },
-                    {
-                    name:'탄수화물',
-                    y:this.allFood.carbo,
-                    },
-                    {
-                    name:'단백질',
-                    y:this.allFood.protein,
-                    },
-                    {
-                    name:'지방',
-                    y:this.allFood.fat,
-                    },
-                    {
-                    name:'당류',
-                    y:this.allFood.sugar,
-                    },
-                    {
-                    name:'나트륨',
-                    y:this.allFood.natrium,
-                    },
-                    {
-                    name:'콜레스테롤',
-                    y:this.allFood.chole,
-                    },
-                    {
-                    name:'포화지방산',
-                    y:this.allFood.fattyacid,
-                    },
-                    {
-                    name:'트렌스지방',
-                    y:this.allFood.transfat,
-                    },
-                ]
             }
         }
+        
     }
 </script>
 
@@ -276,6 +234,7 @@
         background-position: center center;
         text-align: center;
         padding: 30px 0 30px 0;
+    }
     h3{
         font-size: 45px;
         color: #fff;
@@ -290,5 +249,6 @@
         background:white;
         border:0;
     }
-}
+    
+
 </style>

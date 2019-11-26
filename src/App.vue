@@ -55,44 +55,44 @@
                                       <router-link to="/signup" v-if="!valid()"><img class="fa" src="img/signup.png" width="50px" height="20%"></router-link>
                                     </li>
                                     <li>
-                                      <a href="#">
+                                      <a class="siteshare" @click="sendLinkFacebook">
                                         <i class="fa fa-facebook-square"></i>
                                       </a>
                                     </li>
                                     <li>
-                                      <a href="#">
-                                          <i class="fa fa-twitter"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">
-                                              <i class="fa fa-instagram"></i>
-                                          </a>
-                                      </li>
-                                      <li v-if="valid()">
-                                        <router-link class="right_side_menu" to="/userinfo" >{{this.$session.get('jwt').id}}</router-link>
-                                      </li>
-                                      <li v-if="valid()" >
-                                        <a class="right_side_menu" @click="logout">LOGOUT</a>
-                                      </li>
-                                      <li v-if="!valid()"  style="position:relative">
-                                        <a class="right_side_menu" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          LOGIN
-                                        </a>
-                                        <div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
+                                      <a class="siteshare" @click="sendLinktwitter">
+                                        <i class="fa fa-twitter"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a class="siteshare" @click="sendLinkinstagram">
+                                          <i class="fa fa-instagram"></i>
+                                      </a>
+                                    </li>
+                                    <li v-if="valid()">
+                                      <router-link class="right_side_menu" to="/userinfo" >{{this.$session.get('jwt').id}}</router-link>
+                                    </li>
+                                    <li v-if="valid()" >
+                                      <a class="right_side_menu" @click="logout">LOGOUT</a>
+                                    </li>
+                                    <li v-if="!valid()"  style="position:relative">
+                                      <a class="right_side_menu" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        LOGIN
+                                      </a>
+                                      <div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
 
-                                          <div class="card card-body bg-dark" id="loginWindow">
-                                            <form @submit="login">
-                                              <label class="text-white">아이디</label><br>
-                                              <input v-model="id" type="text" class="form-control" name="id" id="identifier" required><br>
-                                              <label class="text-white">비밀번호</label><br>
-                                              <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
-                                              <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
-                                            </form>
-                                            <a class="btn btn-dark" href="#">비밀번호 찾기</a>
-                                          </div>
+                                        <div class="card card-body" id="loginWindow" style=" background-color:black;">
+                                          <form @submit="login">
+                                            <label class="text-white">아이디</label><br>
+                                            <input v-model="id" type="text" class="form-control" name="id" id="identifier" required><br>
+                                            <label class="text-white">비밀번호</label><br>
+                                            <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
+                                            <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
+                                          </form>
+                                          <a class="btn" style=" background-color:black;" href="#">비밀번호 찾기</a>
                                         </div>
-                                      </li>
+                                      </div>
+                                    </li>
 
                                   </ul>
                               </div>
@@ -158,6 +158,8 @@ export default {
               // this.$http.headers.common["Authorization"] =
               //   "Bearer " + response.body.token;
               window.console.log(this.$session.getAll());
+            }else{
+              alert("아이디 또는 비밀번호를 확인하세요");
             }
           },
           function(err) {
@@ -166,8 +168,6 @@ export default {
         )
         .finally(() => {
           window.console.log();
-          
-          
         });
     },
     logout() {
@@ -184,6 +184,22 @@ export default {
     },
     userInfo(){
       this.$router.push("/userinfo");
+    },
+    sendLinkFacebook(){
+      var facebook_share_url = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse";
+      window.open(facebook_share_url,
+                'Share on Facebook',
+                'scrollbars=no, width=500, height=500');
+    },sendLinktwitter(){
+      var twitter_share_url = "https://twitter.com/?lang=ko";
+      window.open(twitter_share_url,
+                'Share on Twitter',
+                'scrollbars=no, width=500, height=500');
+    },sendLinkinstagram(){
+      var instagram_share_url = "https://www.instagram.com/?hl=ko";
+      window.open(instagram_share_url,
+                'Share on Instagram',
+                'scrollbars=no, width=500, height=500');
     }
   }
 }
@@ -201,5 +217,8 @@ export default {
     border:0px;
     color:white;
     font-weight: 500;
+}
+.siteshare{
+  cursor: pointer;
 }
 </style>
