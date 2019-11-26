@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-xl-12">
             <div class="section_title text-center mb-100">
-              <h3>FoodList</h3>
+              <img src="img/foodlist.png" alt="">
               <br>
               <br>
               <br>
