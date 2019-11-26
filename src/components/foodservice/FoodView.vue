@@ -103,6 +103,7 @@ export default {
           }
         }
         if(this.allergin.length==0)this.allergin.push('알러지 없음');
+        this.$EventBus.$emit('update_graph_value');
       });
   },
   methods: {

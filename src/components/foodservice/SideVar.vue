@@ -1,7 +1,7 @@
 <template>
     <div  id="sidevar">
         <div id="JJim_box" class="d-flex flex-column ">
-            <div id="leftCol" class="d-flex justify-content-center rounded" @click="JJimList()">
+            <div id="leftCol" class="d-flex justify-content-center rounded-lg" @click="JJimList()">
                 <div id="JJim_content">
                     <table class="table table-sm">
                         <tr v-for="(f, idx) in foods" :key="idx">
