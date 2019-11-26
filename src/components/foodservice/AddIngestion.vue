@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-row flex-column p-2">
         <div class="d-flex justify-content-center">
-            <input class="form-control" placeholder="number" v-model="food.quantity" type="number" value="1" style="max-width:160px;">
+            <input class="form-control" placeholder="0" v-model="food.quantity" type="number" value="1" style="max-width:160px;">
         </div>
         <div class="d-flex justify-content-center">
             <button class="genric-btn primary-border" @click="JJim(food)">찜</button>

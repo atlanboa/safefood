@@ -69,33 +69,33 @@
                                               <i class="fa fa-instagram"></i>
                                           </a>
                                       </li>
+                                      <li v-if="valid()">
+                                        <router-link class="right_side_menu" to="/userinfo" >{{this.$session.get('jwt').id}}</router-link>
+                                      </li>
+                                      <li v-if="valid()" >
+                                        <a class="right_side_menu" @click="logout">LOGOUT</a>
+                                      </li>
+                                      <li v-if="!valid()"  style="position:relative">
+                                        <a class="right_side_menu" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                          LOGIN
+                                        </a>
+                                        <div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
+
+                                          <div class="card card-body bg-dark" id="loginWindow">
+                                            <form @submit="login">
+                                              <label class="text-white">아이디</label><br>
+                                              <input v-model="id" type="text" class="form-control" name="id" id="identifier" required><br>
+                                              <label class="text-white">비밀번호</label><br>
+                                              <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
+                                              <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
+                                            </form>
+                                            <a class="btn btn-dark" href="#">비밀번호 찾기</a>
+                                          </div>
+                                        </div>
+                                      </li>
+
                                   </ul>
                               </div>
-                              <div class="book_btn d-none d-lg-block">
-                                <!-- <router-link v-if="!valid()" class="popup-with-form" to="/login">Login</router-link> -->
-                                
-                                <router-link to="/userinfo" v-if="valid()">{{this.$session.get('jwt').id}}</router-link>
-                                <a v-if="valid()" @click="logout">Logout</a>
-                              </div>
-                              <div v-if="!valid()" style="position:relative">
-                                <button class="nav-link genric-btn info small" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                  Login
-                                </button>
-                                <div class="collapse" id="collapseExample" style="position: absolute; z-index: 100; right: 0px; width: 250px;">
-
-                                  <div class="card card-body bg-dark" id="loginWindow">
-                                    <form @submit="login">
-                                      <label class="text-white">아이디</label><br>
-                                      <input v-model="id" type="text" class="form-control" name="id" id="identifier" required><br>
-                                      <label class="text-white">비밀번호</label><br>
-                                      <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
-                                      <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
-                                    </form>
-                                    <a class="btn btn-dark" href="#">비밀번호 찾기</a>
-                                  </div>
-                                </div>
-                              </div>
-                              
                           </div>
                       </div>
                       <div class="col-12">
@@ -195,5 +195,11 @@ export default {
     bottom: 25px;
     right: 25px;
     display: none;
+}
+.right_side_menu{
+    background-color: transparent;
+    border:0px;
+    color:white;
+    font-weight: 500;
 }
 </style>
