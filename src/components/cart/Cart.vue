@@ -75,14 +75,14 @@ export default {
       */
       const calendar = this.$refs.calendar;
 
-      var date = calendar._data.store.list[0].dates[0].date;
-      var convertedDate = this.date_to_str(date);
+      var date = calendar._data.pages[0].key+"-"+calendar._data.focusableDay;
+      // var convertedDate = this.date_to_str(date);
 
-      window.console.log(convertedDate);
-      window.console.log(this.$session.get("jwt").id);
 
+      window.console.log(calendar)
+      window.console.log(date)
       var data = {
-        date: convertedDate,
+        date: date,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
         userid : this.$session.get("jwt").id,
       };
