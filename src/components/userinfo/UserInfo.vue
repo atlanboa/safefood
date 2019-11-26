@@ -7,7 +7,7 @@
     <div class="container">
     <div class="row">
       <div class="col-12">
-        <h2 class="contact-title">SignUP</h2>
+        <h2 class="contact-title">Update</h2>
       </div>
       <div class="col-lg-8">
         <form class="form-contact contact_form" method="post" id="contactForm" novalidate="novalidate" @submit.passive="userUpdate">
@@ -48,13 +48,19 @@
                 </div>
                 <div class="form-group">
                     <div class="row" >
-                        <div v-for="(all, index) in allergies" :key="index" class="switch-wrap d-flex justify-content-between col-xl-1 col-md-3">
-                            <p>{{all}}</p>
+                        <!-- <div v-for="(all, index) in allergies" :key="index" class="switch-wrap d-flex justify-content-between col-xl-1 col-md-3">
                             <div class="primary-checkbox">
                                 <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy" type="checkbox" checked="checked">
                                 <input v-else v-model="userall" :id="all" :value="all" class="allergy" type="checkbox">
                                 <label :for="all" ></label>
                             </div>
+                        </div> -->
+                        <div v-for="(all, index) in allergies" :key="index" class="col-3">
+                          <span class="custom-control custom-checkbox">
+                            <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox" checked="checked">
+                            <input v-else v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox">
+                            <label :for="all" class="custom-control-label">{{all}}</label>
+                          </span>
                         </div>
                     </div>
               </div>
@@ -65,8 +71,8 @@
           </div>
         </form>
       </div>
-      <div  class="col-lg-3 offset-lg-1">
-        
+      <div  class="col-lg-3 offset-lg-1" id="sideimg">
+        <img src="img/backgroundfoodimg/update_side_bg.jpg">
       </div>
     </div>
     </div>
@@ -134,5 +140,12 @@ import http from "../../http-common";
 </script>
 
 <style lang="scss" scoped>
-
+  #sideimg{
+    overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 600px;
+  }
 </style>

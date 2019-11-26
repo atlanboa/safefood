@@ -26,7 +26,7 @@
               </div>
               <p>{{food.material}}</p>
               <span>알러지정보 :</span>
-              <span v-for="(item, index) in allergin" :key="index">{{item}}</span>
+              <span v-for="(item, index) in allergin" :key="index">{{item+" "}}</span>
               <br />
               <AddIngestion :food="this.food"></AddIngestion>
               <a href="#" class="line-button">Learn More</a>
@@ -102,6 +102,7 @@ export default {
             this.allergin.push(this.allergies[j]);
           }
         }
+        if(this.allergin.length==0)this.allergin.push('알러지 없음');
       });
   },
   methods: {

@@ -47,11 +47,15 @@
                     Allergies
                 </div>
                 <div class="form-group">
-                    <label class="form-check-label" v-for="(all, index) in allergies" :key="index">
-                      <input v-model="userall" :id="all" :value="all" class="allergy" type="checkbox"/>{{all}}
-                      <br v-if="index%4==0">
-                    </label>
-                <input class="form-control" name="address" id="address" type="text" placeholder="Enter Address"/>
+                  <div class="row" >
+                      <div v-for="(all, index) in allergies" :key="index" class="col-3">
+                        <span class="custom-control custom-checkbox">
+                              <input v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox">
+                              <label :for="all" class="custom-control-label">{{all}}</label>
+                        </span>
+                      </div>
+                    </div>
+
               </div>
             </div>
           </div>
@@ -60,7 +64,7 @@
           </div>
         </form>
       </div>
-      <div class="col-lg-3 offset-lg-1">
+      <div class="col-lg-3 offset-lg-1" id="sideimg">
         <img src="img/backgroundfoodimg/signupImg.jpg">
       </div>
     </div>
@@ -107,11 +111,17 @@ export default {
       });
       this.$router.push('/')
     }
-    
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
+  #sideimg{
+    overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 600px;
+  }
 </style>
