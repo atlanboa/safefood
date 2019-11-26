@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/signup_top_bg_2.jpg);">
-            <h3>공지사항</h3>
+            <img src="img/notice.png" alt="" srcset="">
         </div>
         <table class="table table-hover">
 			<thead>
