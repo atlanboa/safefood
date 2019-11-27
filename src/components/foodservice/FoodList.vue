@@ -47,7 +47,7 @@
     <div class="container">
         <h3>Draggable 1</h3>
         <draggable class="dragArea row" :list="foods" :group="{ name: 'people', pull: 'clone', put: false }" @change="log">
-          <div class="col-xl-3 col-md-3 hanna-font" v-for="element in foods" :key="element.name">
+          <div class="col-xl-3 col-md-3 hanna-font" v-for="element in foods" :key="element.code">
             <!-- {{ element.name }} -->
             <div class="single_offers item_information" @click="show_detail(element.code)">
                 <div class="about_thumb">
@@ -76,7 +76,7 @@
           <div
             
             v-for="element in localstorageList"
-            :key="element.name"
+            :key="element.code"
           >
             {{ element.name }}
           </div>
@@ -190,7 +190,7 @@ export default {
     localstorageAdd(){
       this.componentKey++;
     },updateJJim(code){
-      alert("고찌당"+code);
+      alert("여기당"+code);
     }
   }
 };

@@ -24,9 +24,6 @@
                                 <router-link to="/settingmain/notice">notice</router-link>
                             </li>
                             <li>
-                                <router-link to="/settingmain/notice">free</router-link>
-                            </li>
-                            <li>
                                 <router-link to="/settingmain/qna">qna</router-link>
                             </li>
                         </ul>
@@ -90,6 +87,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 #content{
+    padding-top: 113px;
     min-height: 100vh;
     padding-left: 10px;
 }

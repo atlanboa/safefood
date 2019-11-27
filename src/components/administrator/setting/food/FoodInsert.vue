@@ -3,7 +3,7 @@
         <table class="table table-sm text-center"> 
             <tr>
                 <th>음식 코드</th>
-                <td>음식 코드는 자동으로 증가 합니다.</td>
+                <td><input v-model="food.code"></td>
             </tr>
             <tr>
                 <th>음식 이름</th>
@@ -59,7 +59,7 @@
             </tr>
             <tr>
                 <th>이미지 경로</th>
-                <td><index v-model="food.img"/>></td>
+                <td><input v-model="food.img"></td>
             </tr>
         </table>
         <button @click="foodinsert()">음식 추가</button>
@@ -70,21 +70,20 @@
 import http from "../../../../http-common";
     export default {
         name:"foodinsert",
-        props:["food"],
         data(){
             return{
-                
+                food:{}
             }
         },methods: {
             foodinsert(){
                 http
-                .post("/api/foodinsert/" + this.food)
+                .post("../api/foodinsert/", this.food)
                 .then(() => {})
                 .catch(() => {
                 this.errored = true;
                 })
                 .finally(() => {
-                this.loading = false;
+                this.$router.push("/settingmain/food");
                 });
             }
         },

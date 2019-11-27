@@ -1,19 +1,29 @@
 <template>
     <div>
         <h1>FoodSetting</h1>
-        <table class="table table-sm text-center">
-            <tr>
-                <th>사진</th>
-                <th>상품이름</th>
-                <th>삭제</th>
-            </tr>
-            <tr v-for="food in foods" :key="food.code">
-                <td><img :src="'../'+food.img" style="width:50px; height:50px;"></td>
-                <td>{{food.name}}</td>
-                <td><a class="trash"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
-            </tr>
-        </table>
-        <button @click="insert_food()">foodinsert</button>
+        <div class="row">
+            <div class="col-8">
+                <table class="table table-sm text-center">
+                    <tr>
+                        <th>사진</th>
+                        <th>상품이름</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                    <tr v-for="food in foods" :key="food.code">
+                        <td><img :src="'../'+food.img" style="width:50px; height:50px;"></td>
+                        <td>{{food.name}}</td>
+                        <td><a class="trash" @click="update_food(food.name)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'pen-fancy'}"/></a></td>
+                        <td><a class="trash" @click="delete_food(food.code)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-4">
+                <button class="genric-btn success-border" @click="insert_food()">음식정보 삽입</button>
+            </div>
+        </div>
+        
+        
     </div>
 </template>
 
@@ -72,21 +82,26 @@ import http from "../../../../http-common";
                         this.pageViewList.push(this.userintake[index]);
                 }
             },delete_food(code){
-                http
-                .get("/api/foodelete/" + code)
-                    .then(() => {
+                if(confirm("정말로 삭제하시겠습니까?")){
+                    http
+                    .get("/api/foodelete/" + code)
+                        .then(() => {
 
-                    })
-                    .catch(() => {
-                    this.errored = true;
-                    })
-                    .finally(() => {
-                    this.loading = false;
-                    });
+                        })
+                        .catch(() => {
+                        this.errored = true;
+                        })
+                        .finally(() => {
+                        this.loading = false;
+                        this.start();
+                        });
+                }
             },insert_food(){
-                this.$router.push("/settingmain/foodinsert")
+                this.$router.push("/settingmain/foodinsert");
+            },update_food(name){
+                this.$router.push("/settingmain/foodupdate/"+name);
             }
-        },
+        }
     }
 </script>
 

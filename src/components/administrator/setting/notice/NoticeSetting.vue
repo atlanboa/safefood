@@ -9,6 +9,7 @@
                     <th scope="col">작성자</th>
                     <th scope="col">조회수</th>
                     <th scope="col">작성시간</th>
+                    <th>수정</th>
                     <th>삭제</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <td>{{notice.writer}}</td>
                     <td>{{notice.hit}}</td>
                     <td>{{notice.time}}</td>
+                    <td><a class="trash" @click="update_notice(notice.no)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'pen-fancy'}"/></a></td>
                     <td><a class="trash" @click="delete_notice(notice.no)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
                 </tr>
             </tbody>
@@ -64,6 +66,8 @@ import http from "../../../../http-common";
                 window.console.log(this.notice);
                 });
                 this.start();
+            },update_notice(no){
+                this.$router.push("/settingmain/noticeupdate/"+no);
             }
         },
     }

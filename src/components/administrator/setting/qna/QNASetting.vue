@@ -9,6 +9,7 @@
                 <td>작성자</td>
                 <td>조회수</td>
                 <td>작성시간</td>
+                <td>수정</td>
                 <td>삭제</td>
             </tr>
             </thead>
@@ -19,6 +20,7 @@
                 <td v-html="qna.writer"></td>
                 <td v-html="qna.hit"></td>
                 <td v-html="qna.time"></td>
+                <td><a class="trash" @click="update_qna(qna.no)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'pen-fancy'}"/></a></td>
                 <td><a class="trash" @click="delete_qna(qna.no)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
             </tr>
             </tbody>
@@ -63,6 +65,8 @@ import http from "../../../../http-common";
                     window.console.log(this.qnas);
                     });
                 
+            },update_qna(no){
+                this.$router.push("/settingmain/qnaupdate/"+no);
             }
         },
     }

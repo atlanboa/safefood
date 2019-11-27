@@ -7,11 +7,12 @@ import VModal from 'vue-js-modal'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import HighchartsVue from "highcharts-vue";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faUser, faCog,faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faUser, faCog,faTrashAlt,faPenFancy} from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitter , faYoutube, faInstagram} from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // Add the specific imported icons
+library.add(faPenFancy)
 library.add(faEnvelope)
 library.add(faUser)
 library.add(faCog)

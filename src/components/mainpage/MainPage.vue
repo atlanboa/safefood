@@ -122,8 +122,14 @@ export default {
     };
   },
   mounted() {
+    let result = Math.floor(Math.random() * 20) + 1;
+    let result2 = 1;
+    for(;;){
+      if(result!=result2) break;
+      result2 = Math.floor(Math.random() * 20) + 1;
+    }
     http
-      .get("api/selectByFoodCode/" + 1)
+      .get("api/selectByFoodCode/" + result)
       .then(response => {
         this.food1 = response.data;
         window.console.log(this.food1);
@@ -135,7 +141,7 @@ export default {
         this.loading = false;
       });
     http
-      .get("api/selectByFoodCode/" + 2)
+      .get("api/selectByFoodCode/" + result2)
       .then(response => {
         this.food2 = response.data;
         window.console.log(this.food2);

@@ -48,11 +48,10 @@
                 </div>
                 <div class="form-group">
                     <div class="row" >
-                        <div v-for="(all, index) in allergies" :key="index" class="col-3">
+                        <div v-for="(all) in allergies" :key="all" class="col-3">
                           <span class="custom-control custom-checkbox">
-                            <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox" checked="checked">
-                            <input v-else v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox">
-                            <label :for="all" class="custom-control-label">{{all}}</label>
+                            <input type="checkbox" class="" v-model="user.allergy" :value="all">
+                            <label class="">{{all}}</label>
                           </span>
                         </div>
                     </div>
@@ -88,18 +87,19 @@ import http from "../../http-common";
                     name:this.$session.get('jwt').name,
                     phone:this.$session.get('jwt').phone,
                     address:this.$session.get('jwt').address,
-                    allergy:this.$session.get('jwt').allergy
-                    
+                    allergy:null
                 }
             }
         },mounted(){
+            this.user.allergy=this.$session.get('jwt').allergy.split(" ").slice(0,-1);
             window.console.log(this.$session.get('jwt'))
         },methods:{
             userUpdate(){
-                window.console.log(this.user);
-                for (let index = 0; index < this.userall.length; index++) {
-                    this.user.allergy+=this.userall[index]+" ";
-                }
+              let userallergy=''
+              for (let i = 0; i < this.user.allergy.length; i++) {
+                userallergy+=this.user.allergy[i]+" ";
+              }
+              this.user.allergy=userallergy;
                 http
                 .post("api/updateUser",this.user)
                 .then(response => {
@@ -113,6 +113,7 @@ import http from "../../http-common";
                     this.$session.get('jwt').name=this.user.name;
                     this.$session.get('jwt').phone=this.user.phone;
                     this.$session.get('jwt').address=this.user.address;
+                    this.$session.get('jwt').allergy=this.user.allergy;
                     location.href="/"//////////session 정보 변경 하는 방법좀 ...
                 })
                 .catch(() => {

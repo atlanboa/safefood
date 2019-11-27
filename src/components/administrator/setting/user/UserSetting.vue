@@ -16,7 +16,7 @@
                 <td>{{user.address}}</td>
                 <td>{{user.phone}}</td>
                 <td>{{user.allergy}}</td>
-                <td><a class="trash" @click="delete_user(user.id)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
+                <td><a v-if="user.id!='ssafy'" class="trash" @click="delete_user(user.id)"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
             </tr>
         </table>
     </div>

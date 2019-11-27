@@ -24,11 +24,21 @@
       <div id="clock">
         <p class="time d-flex justify-content-center">{{this.maxIntakeTime}}{{clockbar}}00{{clockbar}}00</p>
       </div>
+      <br><br>
+      <div>
+        <h1 class="text-center">{{nowMonth}} 그래프</h1>
+        <Graph :food="total"></Graph>
+      </div>
+      <div>
+        <h1 class="text-center">이번달에는 {{max.name}} ({{max.count}}개) 를 가장 많이 먹었습니다!</h1>
+      </div>
     </div>
     <!-- popup layer -->
     <div class="row">
       <modals-container />
     </div>
+
+    
     <br>
     <br>
     <br>
@@ -40,6 +50,7 @@
 import Vue from "vue";
 import VCalendar from "v-calendar";
 import http from "../../http-common";
+import Graph from "../foodservice/Graph.vue";
 
 Vue.use(VCalendar, {
   // componentPrefix: "vc" // Use <vc-calendar /> instead of <v-calendar />
@@ -47,6 +58,9 @@ Vue.use(VCalendar, {
 import DayDetail from "./DayDetail.vue";
 export default {
   name: "cart",
+  components:{
+    Graph
+  },
   mounted() {
     http
       // .get("/api/cart/" + this.$session.get("jwt").id)
@@ -60,9 +74,32 @@ export default {
       .finally(() => {
         this.loading = false;
       });
+    const today = new Date();
+    this.nowMonth = today.getFullYear()+"-"+(today.getMonth()+1);//+"-"+today.getDate()+" "
+      //+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+    this.month_chart();
   },
   data() {
     return {
+      nowMonth:'',
+      user_month_foods:[],
+      total:{
+        supportpereat:0,
+        calory:0,
+        carbo:0,
+        protein:0,
+        fat:0,
+        sugar:0,
+        natrium:0,
+        chole:0,
+        fattyacid:0,
+        transfat:0,
+      },
+      max:{
+        name:'',
+        count:0
+      },
+
       clockbar:':',
       attrs: [
         {
@@ -129,10 +166,59 @@ export default {
         this.intervalid1 = setInterval(function(){
           this.clockbar=':'
         }, 1000);
+    },month_chart(){
+      this.total={
+        supportpereat:0,
+        calory:0,
+        carbo:0,
+        protein:0,
+        fat:0,
+        sugar:0,
+        natrium:0,
+        chole:0,
+        fattyacid:0,
+        transfat:0,
+      };
+      this.max={
+        name:'',
+        count:0
+      };
+      let user_month_foods = [];
+      http
+        .post("/api/daydetail", {
+          id: this.$session.get("jwt").id,
+          time: this.nowMonth
+        })
+        .then(response => {
+          user_month_foods = response.data;
+          window.console.log("response.data :::::::: "+JSON.stringify(response.data));
+          for (var num in user_month_foods) {
+            if(this.max.count < user_month_foods[num].count){
+              this.max.name = user_month_foods[num].img.substring(4,user_month_foods[num].img.length-4);
+              this.max.count = user_month_foods[num].count;
+            }
+
+            this.total.supportpereat+=user_month_foods[num].supportpereat;
+            this.total.calory+=user_month_foods[num].calory;
+            this.total.carbo+=user_month_foods[num].carbo;
+            this.total.protein+=user_month_foods[num].protein;
+            this.total.fat+=user_month_foods[num].fat;
+            this.total.sugar+=user_month_foods[num].sugar;
+            this.total.natrium+=user_month_foods[num].natrium;
+            this.total.natrium+=user_month_foods[num].natrium;
+            this.total.chole+=user_month_foods[num].chole;
+            this.total.fattyacid+=user_month_foods[num].fattyacid;
+            this.total.transfat+=user_month_foods[num].transfat;
+          }
+          window.console.log("response.data :::::::: "+JSON.stringify(this.total));
+        })
+        .catch(() => {
+          this.errored = true;
+        })
+        .finally(() => {
+          this.$EventBus.$emit('update_graph_value');
+        });
     }
-  },beforeDestroy(){
-    clearInterval(this.intervalid1),
-    clearInterval(this.intervalid2)
   }
 };
 </script>

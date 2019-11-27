@@ -97,7 +97,7 @@
                                             <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
                                             <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
                                           </form>
-                                          <a class="btn" style=" background-color:black;" href="#">비밀번호 찾기</a>
+                                          <a class="btn" style=" background-color:black;" @click="passwordsearch()">비밀번호 찾기</a>
                                         </div>
                                       </div>
                                     </li>
@@ -220,6 +220,9 @@ export default {
       } else {
         return false;
       }
+    },
+    passwordsearch(){
+      this.$router.push("/passwordsearch");
     }
   }
 }

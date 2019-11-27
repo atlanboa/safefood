@@ -8,14 +8,19 @@ import UserInfo from '../components/userinfo/UserInfo.vue';
 
 import SettingMain from '../components/administrator/setting/SettingMain.vue';
 import SettingHome from '../components/administrator/setting/SettingHome.vue';
+
 import FoodSetting from '../components/administrator/setting/food/FoodSetting.vue';
 import FoodInsert from '../components/administrator/setting/food/FoodInsert.vue';
+import FoodUpdate from '../components/administrator/setting/food/FoodUpdate.vue';
+
 import UserSetting from '../components/administrator/setting/user/UserSetting.vue';
 import NoticeSetting from '../components/administrator/setting/notice/NoticeSetting.vue';
+import NoticeUpdate from '../components/administrator/setting/notice/NoticeUpdate.vue';
 import QNASetting from '../components/administrator/setting/qna/QNASetting.vue';
+import QNAUpdate from '../components/administrator/setting/qna/QNAUpdate.vue';
 
 import SignUp from '../components/administrator/SignUp.vue';
-import Login from '../components/administrator/Login.vue';
+import PasswordSearch from '../components/administrator/PasswordSearch.vue';
 
 import QNAList from "../components/qna/QNAList.vue";
 import QNAView from "../components/qna/QNAView.vue";
@@ -65,10 +70,9 @@ const routes = [
     props:true
     },
   {
-    path: "/login",
-    name: "login",
-    component: Login,
-    props:true
+    path: "/passwordsearch",
+    name: "passwordsearch",
+    component: PasswordSearch
   },
   {
 
@@ -137,12 +141,25 @@ const routes = [
         path: "/settingmain/notice",
         name: "noticesetting",
         component: NoticeSetting
-    
       },
+      {
+        path: "/settingmain/noticeupdate/:no",
+        name: "noticesetting",
+        component: NoticeUpdate,
+        props:true
+      },
+      
       {
         path: "/settingmain/qna",
         name: "qnasetting",
         component: QNASetting
+    
+      },
+      {
+        path: "/settingmain/qnaupdate/:no",
+        name: "qnasetting",
+        component: QNAUpdate,
+        props:true
     
       },
       {
@@ -154,10 +171,16 @@ const routes = [
       {
         path: "/settingmain/foodinsert",
         name: "foodinsert",
-        component: FoodInsert
+        component: FoodInsert,
+        props:true
+      },
+      {
+        path: "/settingmain/foodupdate/:name",
+        name: "foodupdate",
+        component: FoodUpdate,
+        props:true
     
       },
-      
       {
         path: "/settingmain/user",
         name: "usersetting",
