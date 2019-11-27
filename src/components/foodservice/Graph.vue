@@ -32,6 +32,7 @@
                     {
                         name:'양',
                         colorByPoint:true,
+                        
                         data: []
                     }
                     

@@ -13,6 +13,7 @@
                 <td><a class="trash"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'trash-alt'}"/></a></td>
             </tr>
         </table>
+        <button @click="insert_food()">foodinsert</button>
     </div>
 </template>
 
@@ -70,7 +71,21 @@ import http from "../../../../http-common";
                     if(index<this.userintake.length)
                         this.pageViewList.push(this.userintake[index]);
                 }
-            },
+            },delete_food(code){
+                http
+                .get("/api/foodelete/" + code)
+                    .then(() => {
+
+                    })
+                    .catch(() => {
+                    this.errored = true;
+                    })
+                    .finally(() => {
+                    this.loading = false;
+                    });
+            },insert_food(){
+                this.$router.push("/settingmain/foodinsert")
+            }
         },
     }
 </script>

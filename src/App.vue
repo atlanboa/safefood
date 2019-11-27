@@ -129,7 +129,7 @@
 <script>
 import Footer from './components/Footer.vue'
 import http from './http-common.js';
-// import Calendar from './components/calendar/Calendar.vue'
+
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -226,6 +226,7 @@ export default {
 </script>
 
 <style>
+@font-face { font-family: 'HangeulNuri-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
 .back-to-top {
     position: fixed;
     bottom: 25px;
