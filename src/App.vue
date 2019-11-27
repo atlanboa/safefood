@@ -23,14 +23,12 @@
                                       <li><a href="#">boards <i class="ti-angle-down"></i></a>
                                           <ul class="submenu">
                                             <li><router-link to="/notice">Notice</router-link></li>
-                                            <li><router-link to="/qna">Free</router-link></li>
                                             <li><router-link to="/qna">Q&amp;A</router-link></li>
                                           </ul>
                                       </li>
                                       <li v-if="valid()"><a href="#">User<i class="ti-angle-down"></i></a>
                                           <ul class="submenu">
                                               <li><router-link to="/cart">food</router-link></li>
-                                              <li><a href="single-blog.html">single-blog</a></li>
                                           </ul>
                                       </li>
                                       <li>

@@ -3,13 +3,17 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="img/banner/banner.png" alt="First slide" />
+          <img class="d-block w-100" src="img/banner/banner_top_1.jpg" alt="First slide" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>...</h5>
+              <p>...</p>
+            </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="img/banner/banner2.png" alt="Second slide" />
+          <img class="d-block w-100" src="img/banner/banner_top_4.jpg" alt="Second slide" />
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="img/banner/banner.png" alt="Third slide" />
+          <img class="d-block w-100" src="img/banner/banner_top_3.jpg" alt="Third slide" />
         </div>
       </div>
       <a
@@ -31,58 +35,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <!-- <div class="slider_area">
-      <div class="slider_active owl-carousel">
-        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="slider_text text-center">
-                  <h3>Montana Resort</h3>
-                  <p>Unlock to enjoy the view of Martine</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_2">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="slider_text text-center">
-                  <h3>Life is Beautiful</h3>
-                  <p>Unlock to enjoy the view of Martine</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="slider_text text-center">
-                  <h3>Montana Resort</h3>
-                  <p>Unlock to enjoy the view of Martine</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_2">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="slider_text text-center">
-                  <h3>Life is Beautiful</h3>
-                  <p>Unlock to enjoy the view of Martine</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
+    
     <div class="gcse-search"></div>
     <div class="about_area">
       <div class="container">
@@ -90,29 +43,23 @@
           <div class="col-xl-5 col-lg-5">
             <div class="about_info">
               <div class="section_title mb-20px">
-                <span>About Us</span>
                 <h3>
                   오늘의 추천 음식
-                  <br />with Nature
                 </h3>
               </div>
-              <p>
-                {{food1.name}}
-                <br />
-                {{food2.name}}
-                <br />Suscipit libero pretium nullam potenti. Interdum, blandit phasellus consectetuer dolor ornare
-                dapibus enim ut tincidunt rhoncus tellus sollicitudin pede nam maecenas, dolor sem. Neque
-                sollicitudin enim. Dapibus lorem feugiat facilisi faucibus et. Rhoncus.
-              </p>
+              <ul class="unordered-list">
+                <li class="recommend" @click="goFood(food1.code)">{{food1.name}}</li>
+                <li class="recommend"  @click="goFood(food2.code)">{{food2.name}}</li>
+              </ul>
               <button class="line-button main-to-list-button" @click="goFoodList">go food List</button>
             </div>
           </div>
           <div class="col-xl-7 col-lg-7">
             <div class="about_thumb d-flex">
-              <div class="img_1" @click="goFood(food1.code)">
+              <div class="img_1 recommend" @click="goFood(food1.code)">
                 <img class="main_page_images" :src="food1.img" alt />
               </div>
-              <div class="img_2" @click="goFood(food2.code)">
+              <div class="img_2 recommend" @click="goFood(food2.code)">
                 <img class="main_page_images" :src="food2.img" alt />
               </div>
             </div>
@@ -212,5 +159,11 @@ export default {
   background-color: white;
   border: 0;
   outline: 0;
+}
+.recommend{
+  cursor: pointer;
+}
+.recommend:hover{
+  opacity: 0.5;
 }
 </style>

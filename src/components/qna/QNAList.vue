@@ -5,7 +5,9 @@
     </div>
     <br />
     <div class="container">
-      <h1>Q &amp; A</h1>
+      <br><br>
+      <h1 class="text-center">Q &amp; A</h1>
+      <br>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <button

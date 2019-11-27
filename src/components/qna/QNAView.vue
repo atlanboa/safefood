@@ -5,26 +5,6 @@
     </div>
     <br />
     <div class="container">
-      <!-- <table class="table table-hover">
-        <tr class="table-active">
-          <td colspan="2">
-            <h1 v-html="qna.title"></h1>
-          </td>
-        </tr>
-        <tr>
-          <td>작성자</td>
-          <td v-html="qna.writer"></td>
-        </tr>
-        <tr>
-          <td>내용</td>
-          <td v-html="qna.content"></td>
-        </tr>
-        <tr>
-          <td>조회수</td>
-          <td v-html="qna.hit"></td>
-        </tr>
-      </table> -->
-
       <div class="single-post">
         <div class="blog_details">
             <h2>{{qna.title}}
