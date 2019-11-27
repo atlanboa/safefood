@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/qna_top_bg.jpg);">
       <h3>SignUP</h3>
     </div>
     <br />
@@ -15,11 +15,11 @@
                     <td><input type="text" class="form-control" v-model="qna.title" ></td>
                 </tr>
                 <tr>
-                    <td>내용</td>
+                    <td>작성자</td>
                     <td><input type="text" class="form-control" v-model="qna.writer"></td>
                 </tr>
                 <tr>
-                    <td>작성자</td>
+                    <td>내용</td>
                     <td><textarea class="form-control" rows="5" v-model="qna.content"></textarea></td>
                 </tr>
             </table>

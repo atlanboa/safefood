@@ -27,26 +27,28 @@
               <h3 class="footer_title">Navigation</h3>
               <ul>
                 <li>
-                  <a href="#">Home</a>
+                  <router-link to="/">Home</router-link>
                 </li>
                 <li>
-                  <a href="#">Rooms</a>
+                  <router-link to="/foodlist">food</router-link>
                 </li>
                 <li>
-                  <a href="#">About</a>
+                  <router-link to="/about">About</router-link>
                 </li>
                 <li>
-                  <a href="#">News</a>
+                  <router-link to="/qna">Q&amp;A</router-link>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-xl-4 col-md-6 col-lg-4">
             <div class="footer_widget">
-              <h3 class="footer_title">Newsletter</h3>
-              <form action="#" class="newsletter_form">
-                <input type="text" placeholder="Enter your mail" />
-                <button type="submit">Sign Up</button>
+              <h3 class="footer_title">Naver Search</h3>
+              <form action="#" class="newsletter_form" @submit.prevent="NaverSearch()">
+                <input type="text" v-model="searchText" placeholder="Search Text...." />
+                <!-- <input type="submit" src=""/> -->
+                <button id="search_button" type="submit" style="background: url(img/naverSearch.png); background-size:100% 100%;"></button>
+                <!-- background-color: rgb(18,202,56) -->
               </form>
               <p class="newsletter_text">Subscribe newsletter to get updates</p>
             </div>
@@ -66,6 +68,7 @@ export default {
   name: "bottom",
   data() {
     return {
+      searchText:'',
       address: "경산북도 구미시 3공단3로 302"
     };
   },
@@ -84,10 +87,18 @@ export default {
           draggable: true
         }
       );
+    },NaverSearch(){
+      if(this.searchText==''){
+        alert('검색어를 입력하세요');
+      }else{
+        let url = 'https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query='+this.searchText;
+        window.open(url);
+      }
     }
   }
 };
 </script>
 
 <style>
+
 </style>

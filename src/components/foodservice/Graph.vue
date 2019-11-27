@@ -12,10 +12,14 @@
         props:["food"],
         data(){
             return{
+                
                 chartOptions: {
                     chart: {
                     type: "pie",
-                    height:400,
+                    spacingLeft: 0,
+                    spacingRight: 0,
+                    marginLeft:0,
+                    marginRight:0,
                     },
                     title: {
                     text: "Nutrition Information"

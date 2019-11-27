@@ -6,6 +6,23 @@ import VueSession from 'vue-session'
 import VModal from 'vue-js-modal'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import HighchartsVue from "highcharts-vue";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope, faUser, faCog,faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import { faFacebookSquare, faTwitter , faYoutube, faInstagram} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// Add the specific imported icons
+library.add(faEnvelope)
+library.add(faUser)
+library.add(faCog)
+library.add(faFacebookSquare)
+library.add(faTwitter)
+library.add(faYoutube)
+library.add(faInstagram)
+library.add(faTrashAlt)
+
+// Enable the FontAwesomeIcon component globally
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.prototype.$EventBus = new Vue();
 Vue.use(HighchartsVue, { tagName: "charts" });

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
-      <h3>SignUP</h3>
+    <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/qna_top_bg.jpg);">
+      <h3>Q &amp; A</h3>
     </div>
     <br />
     <div class="container">
-      <table class="table table-hover">
+      <!-- <table class="table table-hover">
         <tr class="table-active">
           <td colspan="2">
             <h1 v-html="qna.title"></h1>
@@ -23,39 +23,80 @@
           <td>조회수</td>
           <td v-html="qna.hit"></td>
         </tr>
-      </table>
-      <table class="table table-hover">
-        <tr v-for="(ans, index) in answers" :key="index">
-          <td class="table-active">Administrator</td>
-          <td v-html="ans.content"></td>
-          <td>
-            <input
-              class="btn btn-outline-dark"
-              type="button"
-              value="삭제"
-              @click="delComment(ans.cno)"
-            />
-          </td>
-        </tr>
-      </table>
-      <form @submit="addComment">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="답변 추가....."
-            aria-label="Recipient's username"
-            aria-describedby="basic-addon2"
-            v-model="comment"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit">추가</button>
-          </div>
+      </table> -->
+
+      <div class="single-post">
+        <div class="blog_details">
+            <h2>{{qna.title}}
+            </h2>
+            <ul class="blog-info-link mt-3 mb-4">
+              <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+              <li><a href="#"><i class="fa fa-comments"></i> hits : {{qna.hit}}</a></li>
+            </ul>
+            <p class="excert">
+              {{qna.content}}
+            </p>
         </div>
+      </div>
+      <div class="blog-author">
+        <div class="media align-items-center">
+            <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'user' }" size="6x"/>
+            <div class="media-body">
+              <a href="#">
+                  <h4>{{qna.writer}}</h4>
+              </a>
+              <p>{{qna.time}}</p>
+            </div>
+            <input type="button" class="genric-btn danger" value="delete" id="delete"/><!-- @click="delete_notice"-->
+        </div>
+      </div>
+      <br><hr><br>
+      <div class="comment-list">
+         <div class="single-comment justify-content-between d-flex" v-for="(ans, index) in answers" :key="index">
+            <div class="user justify-content-between d-flex">
+               <div class="thumb">
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'user' }" size="3x"/>
+               </div>
+               <div class="desc">
+                  <p class="comment" v-html="ans.content">
+                     
+                  </p>
+                  <div class="d-flex justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <h5>
+                           <a href="#">Administrator</a>
+                        </h5>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="reply-btn" >
+              <a href="#" class="btn-reply text-uppercase " @click="delComment(ans.cno)">delete</a>
+            </div>
+         </div>
+      </div>
+      <br><hr><br>
+      <h4>Comment</h4>
+      <form @submit="addComment">
+        <div class="row">
+            <div class="col-12">
+               <div class="form-group">
+                  <textarea v-model="comment" class="form-control w-100" name="comment" id="comment" cols="30" rows="5"
+                     placeholder="Write Comment"></textarea>
+               </div>
+              <div class="form-group">
+                  <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
+              </div>
+            </div>
+        </div>
+
       </form>
-      <button class="btn btn btn-warning" @click="updateQNA">QNA 수정</button>
-      <button class="btn btn btn-danger" @click="deleteQNA">QNA 삭제</button>
+      <button class="genric-btn success" @click="updateQNA()">QNA 수정</button>
+      <button class="genric-btn danger" @click="deleteQNA()">QNA 삭제</button>
+      
     </div>
+    <br>
+    <br>
   </div>
 </template>
 
@@ -95,7 +136,7 @@ export default {
   },
   methods: {
     updateQNA() {
-      this.$router.push("api/updateqna/" + this.no);
+      this.$router.push("/updateqna/" + this.no);
     },
     deleteQNA() {
       alert(this.no);

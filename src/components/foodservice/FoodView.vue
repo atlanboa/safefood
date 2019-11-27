@@ -47,6 +47,7 @@
 import http from "../../http-common";
 import AddIngestion from "./AddIngestion.vue";
 import Graph from "./Graph.vue"
+
 export default {
   name: "foodview",
   props: ["code"],

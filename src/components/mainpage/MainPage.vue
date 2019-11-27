@@ -83,7 +83,7 @@
         </div>
       </div>
     </div>-->
-    <stackedgraph></stackedgraph>
+    <div class="gcse-search"></div>
     <div class="about_area">
       <div class="container">
         <div class="row">
@@ -125,7 +125,6 @@
 </template>
 
 <script>
-import stackedgraph from "../foodservice/StackedGraph.vue"
 import http from "../../http-common";
 export default {
   name: "mainpage",
@@ -167,7 +166,6 @@ export default {
       }
     };
   },
-  components:{ stackedgraph },
   mounted() {
     http
       .get("api/selectByFoodCode/" + 1)

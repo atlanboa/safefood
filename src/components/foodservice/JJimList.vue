@@ -25,12 +25,12 @@
                         <th>상품갯수</th>
                         <th>삭제</th>
                     </tr>
-                    <tr v-for="view in pageViewList" :key="view">
-                        <td><img :src="view.img" style="width:50px; height:50px;"></td>
-                        <td>{{view.name}}</td>
-                        <td>{{view.quantity}}</td>
+                    <tr v-for="pages in pageViewList" :key="pages.code">
+                        <td><img :src="pages.img" style="width:50px; height:50px;"></td>
+                        <td>{{pages.name}}</td>
+                        <td>{{pages.quantity}}</td>
                         <td>
-                            <button class="trash_button" @click="delete_JJim(view.code)">
+                            <button class="trash_button" @click="delete_JJim(pages.code)">
                                 <i class="fa fa-trash fa-2x"></i> 
                             </button>
                         </td>
@@ -42,11 +42,9 @@
                             <i class="ti-angle-left"></i>
                         </button>
                     </li>
-                    <template v-for="view in pagelength">
-                        <li class="page-item" :key="view">
-                            <button class="page-link" @click="pagenation(view)">{{view}}</button>
-                        </li>
-                    </template>
+                    <li class="page-item" v-for="view in pagelength" :key="view">
+                        <button class="page-link" @click="pagenation(view)">{{view}}</button>
+                    </li>
                     <li class="page-item">
                         <button class="page-link" aria-label="Next" @click="pagenation('next')">
                             <i class="ti-angle-right"></i>
@@ -54,28 +52,29 @@
                     </li>
                 </ul>
             </div>
+            <div class="col-12">
+                <!-- <StackGraph :items="foods"></StackGraph> -->
+            </div>
         </div>
-        <div class="stackedgraph container">
-            <StackedGraph :foods="foods"></StackedGraph>
-        </div>
-        
     </div>
 </template>
 
 <script>
 import http from "../../http-common";
 import Graph from "./Graph.vue";
-import StackedGraph from "./StackedGraph.vue"
+// import StackGraph from "./StackGraph.vue";
     export default {
         props: ['text'],
         components:{
-            Graph,StackedGraph
+            Graph,
+            // StackGraph
         },
         data(){
             return{
                 pageViewList:[],
                 pagelength:0,
                 pagechoose:1,
+                foods:[],
                 allFood: {
                     code:0,
                     name:'',
@@ -108,116 +107,107 @@ import StackedGraph from "./StackedGraph.vue"
                         data: [
                             ]
                     }
-                    
                 },
-                foods:[]
             }
         },
         mounted(){
             this.start();
         },
-            methods : {
-                start(){
-                    let food = null;
-                    this.foods=[];
-                    for (var key in localStorage){
-                        if(!Number(key))continue;
-                        food = JSON.parse(localStorage.getItem(key));
-                        this.foods.push(food);
-                        this.allFood.supportpereat += food.supportpereat*food.quantity;
-                        this.allFood.calory += food.calory*food.quantity;
-                        this.allFood.carbo += food.carbo*food.quantity;
-                        this.allFood.protein += food.protein*food.quantity;
-                        this.allFood.fat += food.fat*food.quantity;
-                        this.allFood.sugar += food.sugar*food.quantity;
-                        this.allFood.natrium += food.natrium*food.quantity;
-                        this.allFood.chole += food.chole*food.quantity;
-                        this.allFood.fattyacid += food.fattyacid*food.quantity;
-                        this.allFood.transfat += food.transfat*food.quantity;
+        methods : {
+            start(){
+                let food = null;
+                this.foods=[];
+                for (var key in localStorage){
+                    if(!Number(key))continue;
+                    food = JSON.parse(localStorage.getItem(key));
+                    this.foods.push(food);
+                    this.allFood.supportpereat += food.supportpereat*food.quantity;
+                    this.allFood.calory += food.calory*food.quantity;
+                    this.allFood.carbo += food.carbo*food.quantity;
+                    this.allFood.protein += food.protein*food.quantity;
+                    this.allFood.fat += food.fat*food.quantity;
+                    this.allFood.sugar += food.sugar*food.quantity;
+                    this.allFood.natrium += food.natrium*food.quantity;
+                    this.allFood.chole += food.chole*food.quantity;
+                    this.allFood.fattyacid += food.fattyacid*food.quantity;
+                    this.allFood.transfat += food.transfat*food.quantity;
+                }
+                this.pagelength = parseInt(this.foods.length/5);
+                if(this.foods.length%5>0) this.pagelength++;
+                this.pagechoose=1;
+                this.pagenation(1);
+                this.$EventBus.$emit('update_graph_value');
+                this.$EventBus.$emit('update_stack_graph');
+            },
+            close_Popup(){
+                this.$emit('close')
+            },
+            myIngestionInfo(){
+                this.$router.push('/cart');
+            },
+
+            pagenation(page){
+                // alert(page+" "+this.pagelength);
+                if(page==='prev') page=this.pagechoose-1;
+                if(page==='next') page=this.pagechoose+1;
+                if(page<1) {
+                    page=1;
+                    //alert('첫 페이지 입니다.');
+                }
+                if(page>this.pagelength){
+                    page=this.pagelength-1;
+                    //alert('끝 페이지 입니다.');
+                }
+                this.pagechoose=page;
+                this.pageViewList=[];
+                for (let index = (this.pagechoose-1)*5; index < (this.pagechoose-1)*5+5; index++) {
+                    if(index<this.foods.length)
+                        this.pageViewList.push(this.foods[index]);
+                }
+            },delete_JJim(code){
+                // alert(code);
+                localStorage.removeItem(code);
+                this.start();
+            },JJim_to_Cart(){
+                let food = null;
+                this.foods=[];
+                for (var key in localStorage){
+                    if(!Number(key))continue;
+                    food = JSON.parse(localStorage.getItem(key));
+                    localStorage.removeItem(key);
+                    this.foods.push(food);
+                }
+                this.intake(this.foods);
+                this.start();
+                this.$EventBus.$emit('click-icon');
+            },
+            intake(foods){
+                if(this.$session.exists()){
+                    
+                    const today = new Date();
+                    let todayDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "
+                            +today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                    let cartlist=[];
+                    for (let i = 0; i < foods.length; i++) {
+                        cartlist.push({
+                            id: this.$session.get('jwt').id,
+                            code:foods[i].code,
+                            count:Number(foods[i].quantity),
+                            time:todayDate,
+                        });
                     }
-                    this.pagelength = parseInt(this.foods.length/5);
-                    if(this.foods.length%5>0) this.pagelength++;
-                    this.pagechoose=1;
-                    this.pagenation(1);
-                    // alert(JSON.stringify(this.foods));
-                    window.console.log(this.allFood);
-                    this.$EventBus.$emit('update_graph_value');
-                    this.$EventBus.$emit('update_stackedgraph_value');
-                    //update_stackedgraph_value
-                },
-                close_Popup(){
-                    this.$emit('close')
-                },
-                myIngestionInfo(){
-                    this.$router.push('/cart');
-                },
-                show_graph(){
-                    this.allFood.code++;
-                },
-                totalFoodInfo(){
-                
-                },pagenation(page){
-                    // alert(page+" "+this.pagelength);
-                    if(page==='prev') page=this.pagechoose-1;
-                    if(page==='next') page=this.pagechoose+1;
-                    if(page<1) {
-                        page=1;
-                        //alert('첫 페이지 입니다.');
-                    }
-                    if(page>this.pagelength){
-                        page=this.pagelength-1;
-                        //alert('끝 페이지 입니다.');
-                    }
-                    this.pagechoose=page;
-                    this.pageViewList=[];
-                    for (let index = (this.pagechoose-1)*5; index < (this.pagechoose-1)*5+5; index++) {
-                        if(index<this.foods.length)
-                            this.pageViewList.push(this.foods[index]);
-                    }
-                },delete_JJim(code){
-                    alert(code);
-                    localStorage.removeItem(code);
-                    this.start();
-                },JJim_to_Cart(){
-                    let food = null;
-                    this.foods=[];
-                    for (var key in localStorage){
-                        if(!Number(key))continue;
-                        food = JSON.parse(localStorage.getItem(key));
-                        localStorage.removeItem(key);
-                        this.foods.push(food);
-                    }
-                    this.intake(this.foods);
-                    this.start();
-                    this.$EventBus.$emit('click-icon');
-                },
-                intake(foods){
-                    if(this.$session.exists()){
-                        
-                        const today = new Date();
-                        let todayDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "
-                                +today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-                        let cartlist=[];
-                        for (let i = 0; i < foods.length; i++) {
-                            cartlist.push({
-                                id: this.$session.get('jwt').id,
-                                code:foods[i].code,
-                                count:Number(foods[i].quantity),
-                                time:todayDate,
-                            });
-                        }
-                        
-                        alert(JSON.stringify(cartlist));
-                        http
-                            .post("/api/daydetail/insert", cartlist)
-                            .then(() => {
-                                alert("추가 하였습니다.");
-                            })
-                            .catch(() => {
-                            this.errored = true;
-                            })
-                            .finally(() => {
-                    });
+                    
+                    // alert(JSON.stringify(cartlist));
+                    http
+                        .post("/api/daydetail/insert", cartlist)
+                        .then(() => {
+                            alert("추가 하였습니다.");
+                        })
+                        .catch(() => {
+                        this.errored = true;
+                        })
+                        .finally(() => {
+                });
                 }else{
                     alert("로그인을 먼저 하세요!");
                 }
@@ -249,6 +239,5 @@ import StackedGraph from "./StackedGraph.vue"
         background:white;
         border:0;
     }
-    
 
 </style>

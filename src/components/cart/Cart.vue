@@ -5,21 +5,26 @@
         <img src="img/whatdidyoueat.png" alt="" srcset="">
       </div>
     </div>
-    <div>
-      <v-calendar
-        is-expanded
-        ref="calendar"
-        :max-date="new Date()"
-        :attributes="attrs"
-        is-dark
-        @dayclick="click()"
-      />
+    <br>
+    <br>
+    <div  class="container">
+      
+      <h1 class="text-center"> Calender </h1>
+      <div>
+        <v-calendar
+          is-expanded
+          ref="calendar"
+          :max-date="new Date()"
+          :attributes="attrs"
+          is-dark
+          @dayclick="click()"
+        />
+      </div>
+      <div>
+        <h2>분석 사항</h2>
+        <h1>가장 많이 먹는 시간대는 말이져 : {{this.maxIntakeTime}}</h1>
+      </div>
     </div>
-    <div>
-      <h2>분석 사항</h2>
-      <h1>가장 많이 먹는 시간대는 말이져 : {{this.maxIntakeTime}}</h1>
-    </div>
-
     <!-- popup layer -->
     <div class="row">
       <modals-container />

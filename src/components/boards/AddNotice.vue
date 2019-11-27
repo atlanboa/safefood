@@ -13,7 +13,7 @@
         <tr>
           <th>제목</th>
           <th>
-            <input class="form-control" type="text" v-model="notice.title" />
+            <input class="form-control" type="text" v-model="notice.title" placeholder="Write Title" />
           </th>
         </tr>
         </thead>
@@ -28,22 +28,21 @@
         <tr>
           <th>내용</th>
           <th>
-            <textarea class="form-control rounded-0" type="text" v-model="notice.content" style="height:300px;"/>
+            <textarea v-model="notice.content" class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                     placeholder="Write Comment"></textarea>
+            
           </th>
         </tr>
         <tr>
           <th>조회수</th>
           <th>{{notice.hit}}</th>
         </tr>
-        <tr>
-          <th>시간</th>
-          <th>{{notice.time}}</th>
-        </tr>
       </tbody>
     </table>
-    <input type="button" class="btn btn-outline-primary" value="추가" id="update" @click="insert_notice"/>
+    <input type="button" class="genric-btn info" value="추가" id="update" @click="insert_notice"/>
     </div>
-    
+    <br><br>
+    <br>
   </div>
 </template>
 

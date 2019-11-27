@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/qna_top_bg.jpg);">
       <div><img src="img/signuppage.png" alt=""></div>
     </div>
     <br />
@@ -48,8 +48,10 @@
           <td v-html="qna.time"></td>
         </tr>
       </table>
-      <button class="btn btn-primary" @click="addQnA()">글쓰기</button>
+      <button class="genric-btn info" @click="addQnA()">글쓰기</button>
     </div>
+    <br><br>
+    <br>
   </div>
 </template>
 

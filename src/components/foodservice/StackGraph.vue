@@ -7,60 +7,48 @@
 <script>
     export default {
         name:"stackedgraph",
-        props:["foods"],
+        props:["items"],
         data(){
             return{
-                allfoods:{},
                 chartOptions:{
-                        chart: {
-                            type: 'column'
-                        },
-                        events:{
-                              events: {
-                                drilldown: function(e) {
-                                if (!e.seriesOptions) {
-                                    this.vueRef.updateGraph(true, this, e);
-                                }
-                                },
-                                drillup: function(e) {
-                                if (!e.seriesOptions.flag) {
-                                    this.vueRef.drilldownLevel = e.seriesOptions._levelNumber;
-                                    this.vueRef.updateGraph(false);
-                                }
-                                }
-                            }
-                        },
+                    chart: {
+                        type: 'column',
+                        height : 200
+                        
+                    },
+                    title: {
+                        text: 'Browser market shares. January, 2018'
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
                         title: {
-                            text: 'Browser market shares. January, 2018'
-                        },
-                        xAxis: {
-                            type: 'category'
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Total percent market share'
-                            }
+                            text: 'Total percent market share'
+                        }
 
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        plotOptions: {
-                            series: {
-                                borderWidth: 0,
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '{point.y:.1f}%'
-                                }
-                            }
-                        },
-                        tooltip: {
-                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-                        },
-                        series: [
+                    },
+                    // legend: {
+                    //     enabled: false
+                    // },
+                    // plotOptions: {
+                    //     series: {
+                    //         borderWidth: 0,
+                    //         dataLabels: {
+                    //             enabled: true,
+                    //             format: '{point.y:.1f}%'
+                    //         }
+                    //     }
+                    // },
+
+                    // tooltip: {
+                    //     headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    //     pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                    // },
+
+                    series: [
                         {
-                            name: "Nutrition",
+                            name: "Browsers",
                             colorByPoint: true,
                             data: [
                                 {
@@ -323,102 +311,20 @@
                     }
                 }
             }
-        },
-        created(){
-            this.$EventBus.$on('update_stackedgraph_value', () => {
+        },created() {
+            
+        },mounted(){
+            this.$EventBus.$on('update_stack_graph',()=>{
                 this.graphUpdate();
             });
-        },
-        methods: {
+        },methods: {
             graphUpdate(){
-                let calory={
-                                name: "calory",
-                                id: "calory",
-                                data: []
-                            };
-                let carbo=[];
-                let protein=[];
-                let fat=[];
-                let sugar=[];
-                let natrium=[];
-                let chole=[];
-                let fattyacid=[];
-                let transfat=[];
-                this.chartOptions.series.data=[];
-                for (let i = 0; i < this.foods.length; i++) {
-                    calory.data.push([this.foods[i].name,this.foods[i].calory]);
-                    carbo.data.push([this.foods[i].name,this.foods[i].carbo]);
-                    protein.data.push([this.foods[i].name,this.foods[i].protein]);
-                    fat.data.push([this.foods[i].name,this.foods[i].fat]);
-                    sugar.data.push([this.foods[i].name,this.foods[i].sugar]);
-                    natrium.data.push([this.foods[i].name,this.foods[i].natrium]);
-                    chole.data.push([this.foods[i].name,this.foods[i].chole]);
-                    fattyacid.data.push([this.foods[i].name,this.foods[i].fattyacid]);
-                    transfat.data.push([this.foods[i].name,this.foods[i].transfat]);
-                    this.allfoods.calory+=this.foods[i].calory;
-                    this.allfoods.carbo+=this.foods[i].carbo;
-                    this.allfoods.protein+=this.foods[i].protein;
-                    this.allfoods.fat+=this.foods[i].fat;
-                    this.allfoods.sugar+=this.foods[i].sugar;
-                    this.allfoods.natrium+=this.foods[i].natrium;
-                    this.allfoods.chole+=this.foods[i].chole;
-                    this.allfoods.fattyacid+=this.foods[i].fattyacid;
-                    this.allfoods.transfat+=this.foods[i].transfat;
-                }
-                this.chartOptions.series.data.push({
-                    name:"calory",
-                    y:this.allfoods.calory,
-                    drilldown:"calory"
-                });
-                this.chartOptions.series.data.push({
-                    name:"carbo",
-                    y:this.allfoods.carbo,
-                    drilldown:"carbo"
-                });
-                this.chartOptions.series.data.push({
-                    name:"protein",
-                    y:this.allfoods.protein,
-                    drilldown:"protein"
-                });
-                this.chartOptions.series.data.push({
-                    name:"fat",
-                    y:this.allfoods.fat,
-                    drilldown:"fat"
-                });
-                this.chartOptions.series.data.push({
-                    name:"sugar",
-                    y:this.allfoods.sugar,
-                    drilldown:"sugar"
-                });
-                this.chartOptions.series.data.push({
-                    name:"natrium",
-                    y:this.allfoods.natrium,
-                    drilldown:"natrium"
-                });
-                this.chartOptions.series.data.push({
-                    name:"chole",
-                    y:this.allfoods.chole,
-                    drilldown:"chole"
-                });
-                this.chartOptions.series.data.push({
-                    name:"fattyacid",
-                    y:this.allfoods.fattyacid,
-                    drilldown:"fattyacid"
-                });
-                this.chartOptions.series.data.push({
-                    name:"transfat",
-                    y:this.allfoods.transfat,
-                    drilldown:"transfat"
-                });
-
-            },
-            
+                alert(JSON.stringify(this.items));
+            }
         },
     }
 </script>
 
 <style lang="scss" scoped>
-    // .stackedgraph{
-    //     width: 400px;
-    // }
+
 </style>

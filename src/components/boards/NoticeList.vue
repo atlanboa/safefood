@@ -32,8 +32,11 @@
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
-            <input v-if="valid()" class="btn btn-primary" type="button" @click="add_notice" value="글쓰기"/>
+            <input v-if="valid()" class="genric-btn info" type="button" @click="add_notice" value="글쓰기"/>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 </template>
 

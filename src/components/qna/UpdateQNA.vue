@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bradcam_area breadcam_bg_1">
+        <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/qna_top_bg.jpg);">
             <h3>SignUP</h3>
         </div>
         <br>
@@ -50,7 +50,7 @@ import http from "../../http-common";
         },
         mounted(){
             http
-                .get("/qnano/"+this.no)
+                .get("api/qnano/"+this.no)
                 .then(response => { this.qna=response.data;
                     
                 })
@@ -62,7 +62,7 @@ import http from "../../http-common";
         methods:{
             updateQNA(){
                 http
-                    .put("/updateqna",this.qna)
+                    .put("api/updateqna",this.qna)
                     .then(response => {
                         if(response.data == true){
                             alert('등록 됨');

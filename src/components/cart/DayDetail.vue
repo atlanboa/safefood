@@ -1,8 +1,8 @@
 <template>
   <div class="example-modal-content">
-            <div class="top_bg_area" style="background-image: url(../img/backgroundfoodimg/JJimlist_top_br.jpg);">
+        <div class="top_bg_area" style="background-image: url(../img/backgroundfoodimg/JJimlist_top_br.jpg);">
             <div>
-                <h3>Eat List</h3>
+                <h3>DayDetail</h3>
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -24,7 +24,7 @@
                         <th>상품갯수</th>
                         <th>삭제</th>
                     </tr>
-                    <tr v-for="page in pageViewList" :key="page">
+                    <tr v-for="page in pageViewList" :key="page.code">
                         <td><img :src="page.img" style="width:50px; height:50px;"></td>
                         <td>{{page.name}}</td>
                         <td>{{page.count}}</td>

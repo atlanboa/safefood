@@ -5,6 +5,14 @@ import MainHeader from '../components/mainpage/MainPage.vue';
 import FoodList from '../components/foodservice/FoodList.vue';
 import FoodView from '../components/foodservice/FoodView.vue';
 import UserInfo from '../components/userinfo/UserInfo.vue';
+
+import SettingMain from '../components/administrator/setting/SettingMain.vue';
+import SettingHome from '../components/administrator/setting/SettingHome.vue';
+import FoodSetting from '../components/administrator/setting/food/FoodSetting.vue';
+import UserSetting from '../components/administrator/setting/user/UserSetting.vue';
+import NoticeSetting from '../components/administrator/setting/notice/NoticeSetting.vue';
+import QNASetting from '../components/administrator/setting/qna/QNASetting.vue';
+
 import SignUp from '../components/administrator/SignUp.vue';
 import Login from '../components/administrator/Login.vue';
 
@@ -113,7 +121,43 @@ const routes = [
     component: Cart
 
   },
-
+  {
+    path: "/settingmain",
+    name: "settingmain",
+    component: SettingMain,
+    children:[
+      {
+        path: "/settingmain/home",
+        name: "settinghome",
+        component: SettingHome
+    
+      },
+      {
+        path: "/settingmain/notice",
+        name: "noticesetting",
+        component: NoticeSetting
+    
+      },
+      {
+        path: "/settingmain/qna",
+        name: "qnasetting",
+        component: QNASetting
+    
+      },
+      {
+        path: "/settingmain/food",
+        name: "foodsetting",
+        component: FoodSetting
+    
+      },
+      {
+        path: "/settingmain/user",
+        name: "usersetting",
+        component: UserSetting
+    
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({

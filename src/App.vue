@@ -51,22 +51,32 @@
                           <div class="book_room">
                               <div class="socail_links">
                                   <ul>
+                                    <li v-if="conformAdmin()">
+                                      <router-link to="/settingmain" class="siteshare">
+                                        <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'cog' }"/>
+                                      </router-link>
+                                    </li>
                                     <li>
                                       <router-link to="/signup" v-if="!valid()"><img class="fa" src="img/signup.png" width="50px" height="20%"></router-link>
                                     </li>
                                     <li>
                                       <a class="siteshare" @click="sendLinkFacebook">
-                                        <i class="fa fa-facebook-square"></i>
+                                        <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-square' }"/>
                                       </a>
                                     </li>
                                     <li>
                                       <a class="siteshare" @click="sendLinktwitter">
-                                        <i class="fa fa-twitter"></i>
+                                        <font-awesome-icon :icon="['fab', 'twitter']"/>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a class="siteshare" @click="sendLinkyoutube">
+                                        <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'youtube' }"/>
                                       </a>
                                     </li>
                                     <li>
                                       <a class="siteshare" @click="sendLinkinstagram">
-                                          <i class="fa fa-instagram"></i>
+                                        <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'instagram' }"/>
                                       </a>
                                     </li>
                                     <li v-if="valid()">
@@ -200,6 +210,18 @@ export default {
       window.open(instagram_share_url,
                 'Share on Instagram',
                 'scrollbars=no, width=500, height=500');
+    },sendLinkyoutube(){
+      var instagram_share_url = "https://youtube.com";
+      window.open(instagram_share_url,
+                'Share on Instagram',
+                'scrollbars=no, width=500, height=500');
+    }
+      ,conformAdmin(){
+      if (this.$session.exists()&&this.$session.get('jwt').id=='ssafy') {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 }
