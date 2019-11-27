@@ -1,3 +1,9 @@
+/*
+  Version 1.6.0 by 금오공과대학교 김상헌, 대구대학교 전재욱
+  2019.11.27 
+*/
+
+
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
