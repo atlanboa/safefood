@@ -2,14 +2,13 @@
   <div>
     <div class="bradcam_area breadcam_bg_1">
       <div>
-        <img src="img/whatdidyoueat.png" alt="" srcset="">
+        <img src="img/whatdidyoueat.png" alt srcset />
       </div>
     </div>
-    <br>
-    <br>
-    <div  class="container">
-      
-      <h1 class="text-center"> Calender </h1>
+    <br />
+    <br />
+    <div class="container">
+      <h1 class="text-center">Calender</h1>
       <div>
         <v-calendar
           is-expanded
@@ -21,8 +20,9 @@
         />
       </div>
       <div>
-        <h2>분석 사항</h2>
-        <h1>가장 많이 먹는 시간대는 말이져 : {{this.maxIntakeTime}}</h1>
+        <br>
+        <h1 class="text-center">당신이 가장 많이 먹는 시간대는 : {{this.maxIntakeTime}}시</h1>
+        <br>
       </div>
     </div>
     <!-- popup layer -->
@@ -45,8 +45,8 @@ export default {
   name: "cart",
   mounted() {
     http
-      // .get("/api/cart/" + this.$session.get("jwt").id)
-      .get("/api/cart/"+"ssafy")
+      .get("/api/cart/" + this.$session.get("jwt").id)
+      // .get("/api/cart/"+"ssafy")
       .then(response => {
         this.maxIntakeTime = response.data;
       })
@@ -56,6 +56,30 @@ export default {
       .finally(() => {
         this.loading = false;
       });
+
+      window.console.log(new Date())
+
+    // http
+    //   .get("/api/cart2/" + this.$session.get("jwt").id)
+    //   // .get("/api/cart/"+"ssafy")
+    //   .then(response => {
+    //     this.intakes = response.data;
+
+    //     this.intakes.forEach(function(intake){
+    //       this.attrs.push({
+    //         key : intake.time,
+    //         highlight : "blue",
+    //         dates : 
+    //       })
+    //     })
+
+    //   })
+    //   .catch(() => {
+    //     this.errored = true;
+    //   })
+    //   .finally(() => {
+    //     this.loading = false;
+    //   });
   },
   data() {
     return {
@@ -66,8 +90,7 @@ export default {
           dates: new Date()
         }
       ],
-      
-      
+      // intakes : [],
       maxIntakeTime: null
     };
   },
@@ -80,16 +103,16 @@ export default {
       */
       const calendar = this.$refs.calendar;
 
-      var date = calendar._data.pages[0].key+"-"+calendar._data.focusableDay;
+      var date =
+        calendar._data.pages[0].key + "-" + calendar._data.focusableDay;
       // var convertedDate = this.date_to_str(date);
 
-
-      window.console.log(calendar)
-      window.console.log(date)
+      window.console.log(calendar);
+      window.console.log(date);
       var data = {
         date: date,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
-        userid : this.$session.get("jwt").id,
+        userid: this.$session.get("jwt").id
       };
 
       this.$modal.show(
