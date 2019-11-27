@@ -4,16 +4,24 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img class="d-block w-100" src="img/banner/banner_top_1.jpg" alt="First slide" />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>...</h5>
-              <p>...</p>
+            <div class="carousel-caption">
+              <h3>Food</h3>
+              <p>Food Information</p>
             </div>
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="img/banner/banner_top_4.jpg" alt="Second slide" />
+            <div class="carousel-caption">
+              <h3>Food</h3>
+              <p>Food Information</p>
+            </div>
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="img/banner/banner_top_3.jpg" alt="Third slide" />
+            <div class="carousel-caption">
+              <h3>Food</h3>
+              <p>Food Information</p>
+            </div>
         </div>
       </div>
       <a
@@ -165,5 +173,17 @@ export default {
 }
 .recommend:hover{
   opacity: 0.5;
+}
+.carousel-caption {
+    width:100%;
+    height:100%;
+    left:0 !important;
+}
+
+.carousel-caption h3 {
+  margin-top:30%;
+}
+.carousel-caption p {
+  margin-top:1%;
 }
 </style>

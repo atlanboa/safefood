@@ -44,18 +44,10 @@
             </div>
             <div class="col-12">
                 <div>
-                    Allergies
+                    Allergies : {{user.allergy}}
                 </div>
                 <div class="form-group">
                     <div class="row" >
-                        <!-- <div v-for="(all, index) in allergies" :key="index" class="switch-wrap d-flex justify-content-between col-xl-1 col-md-3">
-                            <div class="primary-checkbox">
-                                <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy" type="checkbox" checked="checked">
-                                <input v-else v-model="userall" :id="all" :value="all" class="allergy" type="checkbox">
-                                <label :for="all" ></label>
-                            </div>
-                        </div> -->
-                        {{user.allergy}}
                         <div v-for="(all, index) in allergies" :key="index" class="col-3">
                           <span class="custom-control custom-checkbox">
                             <input v-if="allCheck(all)" v-model="userall" :id="all" :value="all" class="allergy custom-control-input" type="checkbox" checked="checked">

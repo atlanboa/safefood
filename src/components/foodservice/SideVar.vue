@@ -106,17 +106,16 @@
         margin-top: 20%;
         margin-left:15px;
         position: fixed;
-        height: 300px;
+        height: 350px;
         width: 100px;
         background-color: white; 
         font-size: 1em;
         overflow-y: scroll;
-        z-index: 0;
+        z-index: 1;
         border: 10px solid #DDD;
         &::-webkit-scrollbar { 
         display: none !important; // 윈도우 크롬 등
         }
-        
     }
     #JJim_content {
         position: relative;

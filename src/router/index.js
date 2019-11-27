@@ -9,6 +9,7 @@ import UserInfo from '../components/userinfo/UserInfo.vue';
 import SettingMain from '../components/administrator/setting/SettingMain.vue';
 import SettingHome from '../components/administrator/setting/SettingHome.vue';
 import FoodSetting from '../components/administrator/setting/food/FoodSetting.vue';
+import FoodInsert from '../components/administrator/setting/food/FoodInsert.vue';
 import UserSetting from '../components/administrator/setting/user/UserSetting.vue';
 import NoticeSetting from '../components/administrator/setting/notice/NoticeSetting.vue';
 import QNASetting from '../components/administrator/setting/qna/QNASetting.vue';
@@ -150,6 +151,13 @@ const routes = [
         component: FoodSetting
     
       },
+      {
+        path: "/settingmain/foodinsert",
+        name: "foodinsert",
+        component: FoodInsert
+    
+      },
+      
       {
         path: "/settingmain/user",
         name: "usersetting",
