@@ -1,7 +1,6 @@
 <template>
     <div>
         <h1>QNA Update</h1>
-        {{qna}}
         <table class="table">
         <thead>
         <tr>

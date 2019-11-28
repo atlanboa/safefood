@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Setting Home</h1>
-        모든 메뉴 삭제 가능
+        메뉴 관리 및 사용자 관리
     </div>
 </template>
 
