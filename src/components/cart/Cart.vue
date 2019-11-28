@@ -2,7 +2,7 @@
   <div>
     <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/cart_top_bg_2.jpg);">
       <div>
-        <img src="img/whatdidyoueat.png" alt="" srcset="">
+        <img src="img/whatdidyoueat.png" alt srcset />
       </div>
     </div>
     <br>
@@ -63,8 +63,8 @@ export default {
   },
   mounted() {
     http
-      // .get("/api/cart/" + this.$session.get("jwt").id)
-      .get("/api/cart/"+"ssafy")
+      .get("/api/cart/" + this.$session.get("jwt").id)
+      // .get("/api/cart/"+"ssafy")
       .then(response => {
         this.maxIntakeTime = response.data;
       })
@@ -109,8 +109,7 @@ export default {
           dates: new Date()
         }
       ],
-      
-      
+      // intakes : [],
       maxIntakeTime: null
     };
   },
@@ -123,16 +122,16 @@ export default {
       */
       const calendar = this.$refs.calendar;
 
-      var date = calendar._data.pages[0].key+"-"+calendar._data.focusableDay;
+      var date =
+        calendar._data.pages[0].key + "-" + calendar._data.focusableDay;
       // var convertedDate = this.date_to_str(date);
 
-
-      window.console.log(calendar)
-      window.console.log(date)
+      window.console.log(calendar);
+      window.console.log(date);
       var data = {
         date: date,
         //userid는 페이지 넘어가서도 아마 받을수 있을꺼니깐 안넘겨도 될듯
-        userid : this.$session.get("jwt").id,
+        userid: this.$session.get("jwt").id
       };
 
       this.$modal.show(
