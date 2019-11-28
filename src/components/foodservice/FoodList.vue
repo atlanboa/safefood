@@ -221,6 +221,7 @@ export default {
   font-family:'HangeulNuri-Bold';
 }
 .warning_food{
-  background-color: red;
+  background-color: rgba(255,0,0,0.5);
+  border-radius: 10px;
 }
 </style>
