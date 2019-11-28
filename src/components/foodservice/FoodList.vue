@@ -44,64 +44,39 @@
           </div>
         </div>
             <!-- draggable -->
-    <div class="container">
-        <h3>Draggable 1</h3>
-        <draggable class="dragArea row" :list="foods" :group="{ name: 'people', pull: 'clone', put: false }" @change="log">
-          <div class="col-xl-3 col-md-3 hanna-font" v-for="element in foods" :key="element.code">
-            <!-- {{ element.name }} -->
-            <div class="single_offers item_information" @click="show_detail(element.code)">
-                <div class="about_thumb">
-                  <img class="foodimg" :src="element.img" style="width:100%; height:100%"/>
-                </div>
-                <h4 class="item_title hanna-font">
-                  {{element.name}}
-                </h4>
-                <h6 class="item_maker" style="font-size:12px;">
-                  {{element.maker}}
-                </h6>
+        <div class="container">
+            <h3>Draggable 1</h3>
+            <draggable class="dragArea row" :list="foods" :group="{ name: 'people', pull: 'clone', put: false }" @change="log">
+              <div class="col-xl-3 col-md-3 hanna-font" v-for="element in foods" :key="element.code">
+                <!-- {{ element.name }} -->
+                <div class="single_offers item_information" :class="{warning_food:allergy_menu_warnning(element.material)}" @click="show_detail(element.code)">
+                    <div class="about_thumb">
+                      <img class="foodimg" :src="element.img" style="width:100%; height:100%"/>
+                    </div>
+                    <h4 class="item_title hanna-font">
+                      {{element.name}}
+                    </h4>
+                    <h6 class="item_maker" style="font-size:12px;">
+                      {{element.maker}}
+                    </h6>
+                  </div>
+                  <AddIngestion :food="element"></AddIngestion>
               </div>
-              <AddIngestion :food="element"></AddIngestion>
-          </div>
-      </draggable>
-    
+          </draggable>
+        
 
-      <div>
-        <h3>Draggable 2</h3>
-        <draggable id="leftside"
-          class="dragArea"
-          :list="localstorageList"
-          group="people"
-          @change="localstorageinsert"
-        >
-          <div
-            
-            v-for="element in localstorageList"
-            :key="element.code"
-          >
-            {{ element.name }}
-          </div>
-        </draggable>
-      </div>
-      <rawDisplayer class="col-12" :value="foods" title="List 1" />
-      <rawDisplayer :value="localstorageList" title="List 2" />
-    </div>
-    <!-- end draggable -->
-        <!-- <div class="row">
-          <div v-for="(food, index) in foods" :key="index" class="col-xl-3 col-md-3">
-            <div class="single_offers item_information" @click="show_detail(food.code)">
-              <div class="about_thumb">
-                <img class="foodimg" :src="food.img" />
+          <div>
+            <h3>Draggable 2</h3>
+            <draggable id="leftside" class="dragArea" :list="localstorageList" group="people" @change="localstorageinsert">
+              <div v-for="element in localstorageList" :key="element.code">
+                {{ element.name }}
               </div>
-              <h4 class="item_title">
-                {{food.name}}
-              </h4>
-              <h6 class="item_maker" style="font-size:12px;">
-                {{food.maker}}
-              </h6>
-            </div>
-            <AddIngestion :food="food"></AddIngestion>
+            </draggable>
           </div>
-        </div> -->
+          <rawDisplayer class="col-12" :value="foods" title="List 1" />
+          <rawDisplayer :value="localstorageList" title="List 2" />
+        </div>
+        <!-- end draggable -->
       </div>
     </div>
     <!-- offers_area_end -->
@@ -189,8 +164,16 @@ export default {
     },
     localstorageAdd(){
       this.componentKey++;
-    },updateJJim(code){
-      alert("여기당"+code);
+    },allergy_menu_warnning(material){
+      if(this.$session.exists()){
+        let allergy = this.$session.get('jwt').allergy.split(" ").slice(0,-1);
+        for (let i = 0; i < allergy.length; i++) {
+          if(material.indexOf(allergy[i])>-1){
+            return true;
+          }
+        }
+      }
+      return false;
     }
   }
 };
@@ -236,5 +219,8 @@ export default {
 
 .hanna-font{
   font-family:'HangeulNuri-Bold';
+}
+.warning_food{
+  background-color: red;
 }
 </style>

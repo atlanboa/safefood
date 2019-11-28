@@ -49,8 +49,8 @@
                 <div class="form-group">
                     <div class="row" >
                         <div v-for="(all) in allergies" :key="all" class="col-3">
-                          <span class="custom-control custom-checkbox">
-                            <input type="checkbox" class="" v-model="user.allergy" :value="all">
+                          <span class="checkbox checkbox-success">
+                            <input type="checkbox" class="styled" v-model="user.allergy" :value="all">
                             <label class="">{{all}}</label>
                           </span>
                         </div>
@@ -142,4 +142,5 @@ import http from "../../http-common";
             width: 100%;
             height: 600px;
   }
+
 </style>

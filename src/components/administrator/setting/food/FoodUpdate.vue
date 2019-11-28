@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{food}}
         <table class="table table-sm text-center"> 
             <tr>
                 <th>음식 코드</th>
@@ -63,7 +62,7 @@
                 <td><input v-model="food[0].img"></td>
             </tr>
         </table>
-        <button @click="foodupdate()">업데이트</button>
+        <button class="genric-btn success-border" @click="foodupdate()">업데이트</button>
     </div>
 </template>
 

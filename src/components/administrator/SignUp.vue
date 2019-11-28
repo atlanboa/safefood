@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/signup_top_bg_2.jpg);">
-      <h3>SignUP</h3>
+      <div><img src="img/signuppage.png" alt=""></div>
     </div>
     <br>
     <div class="container">

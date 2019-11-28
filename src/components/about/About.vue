@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/about_top_bg.jpg);">
       <img src="img/about.png" alt="" srcset="">
     </div>
     <!-- <div class="slider_area">
