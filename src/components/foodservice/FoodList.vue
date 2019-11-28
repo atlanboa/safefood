@@ -9,40 +9,7 @@
     </div>
     <!-- bradcam_area_end -->
 
-    <!-- <div>
-      <div class="row">
-        <div class="col-3">
-          <h3>Draggable 1</h3>
-          <draggable
-            class="dragArea list-group"
-            :list="list1"
-            :group="{ name: 'people', pull: 'foodlist', put: false }"
-            @change="log"
-          >
-            <div
-              class="list-group-item"
-              v-for="element in list1"
-              :key="element.name"
-            >{{ element.name }}</div>
-          </draggable>
-        </div>
 
-        <div class="col-3">
-          <h3>Draggable 2</h3>
-          <draggable class="dragArea list-group" :list="list2" group="people" @change="log">
-            <div
-              class="list-group-item"
-              v-for="element in list2"
-              :key="element.name"
-            >{{ element.name }}</div>
-          </draggable>
-        </div>
-
-        <rawDisplayer class="col-3" :value="list1" title="List 1" />
-
-        <rawDisplayer class="col-3" :value="list2" title="List 2" />
-      </div>
-    </div> -->
     <!-- offers_area_start -->
     <div class="offers_area padding_top">
       <div class="container">
@@ -76,7 +43,50 @@
             </div>
           </div>
         </div>
-        <div class="row">
+            <!-- draggable -->
+    <div class="container">
+        <h3>Draggable 1</h3>
+        <draggable class="dragArea row" :list="foods" :group="{ name: 'people', pull: 'clone', put: false }" @change="log">
+          <div class="col-xl-3 col-md-3 hanna-font" v-for="element in foods" :key="element.name">
+            <!-- {{ element.name }} -->
+            <div class="single_offers item_information" @click="show_detail(element.code)">
+                <div class="about_thumb">
+                  <img class="foodimg" :src="element.img" style="width:100%; height:100%"/>
+                </div>
+                <h4 class="item_title hanna-font">
+                  {{element.name}}
+                </h4>
+                <h6 class="item_maker" style="font-size:12px;">
+                  {{element.maker}}
+                </h6>
+              </div>
+              <AddIngestion :food="element"></AddIngestion>
+          </div>
+      </draggable>
+    
+
+      <div>
+        <h3>Draggable 2</h3>
+        <draggable id="leftside"
+          class="dragArea"
+          :list="localstorageList"
+          group="people"
+          @change="localstorageinsert"
+        >
+          <div
+            
+            v-for="element in localstorageList"
+            :key="element.name"
+          >
+            {{ element.name }}
+          </div>
+        </draggable>
+      </div>
+      <rawDisplayer class="col-12" :value="foods" title="List 1" />
+      <rawDisplayer :value="localstorageList" title="List 2" />
+    </div>
+    <!-- end draggable -->
+        <!-- <div class="row">
           <div v-for="(food, index) in foods" :key="index" class="col-xl-3 col-md-3">
             <div class="single_offers item_information" @click="show_detail(food.code)">
               <div class="about_thumb">
@@ -91,7 +101,7 @@
             </div>
             <AddIngestion :food="food"></AddIngestion>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- offers_area_end -->
@@ -102,7 +112,7 @@
 import SideVar from "./SideVar.vue";
 import AddIngestion from "./AddIngestion.vue";
 import http from "../../http-common";
-// import draggable from "vuedraggable";
+import draggable from "vuedraggable";
 export default {
   name: "foodlist",
   display: "Clone",
@@ -114,23 +124,15 @@ export default {
       food: {},
       foods: [],
       category: "name",
-      list1: [
-        { name: "John", id: 1 },
-        { name: "Joao", id: 2 },
-        { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 }
-      ],
-      list2: [
-        { name: "Juan", id: 5 },
-        { name: "Edgard", id: 6 },
-        { name: "Johnson", id: 7 }
+      localstorageList: [
+        
       ]
     };
   },
   components: {
     AddIngestion,
     SideVar,
-    // draggable
+    draggable
   },
   mounted() {
     this.initail();
@@ -151,7 +153,27 @@ export default {
       this.$router.push("/foodview/" + code);
     },
     log: function(evt) {
+      
       window.console.log(evt);
+    },localstorageinsert(evt){
+      let inputFood = evt.added.element;
+      if(inputFood.quantity==null||inputFood.quantityL<1){
+        alert("찜갯수를 정하지 않았습니다.")
+      }else{
+        let localValue = localStorage.getItem(inputFood.code);
+        if(localValue){
+        let localValueToJson = JSON.parse(localValue);
+        inputFood.quantity = Number(inputFood.quantity) + Number(localValueToJson.quantity);
+        }
+        localStorage.setItem(
+        inputFood.code,
+        JSON.stringify(inputFood)
+        );
+        this.food.quantity=0;
+      }
+      this.$EventBus.$emit('click-icon')
+      window.console.log(evt);
+      this.localstorageList=[];
     },
     search(){
       if(this.searchText==""){
@@ -190,5 +212,29 @@ export default {
 }
 .item_information:hover{
   opacity: 0.5;
+}
+#leftside {
+    color:transparent;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background-color:transparent;
+    height: 300%;
+    width: 200px;
+    font-size: 1em;
+    z-index: 0;
+    border: 0px solid transparent;
+  }
+#leftside * {
+  color:transparent;
+  background-color:transparent;
+  border: 0;
+  outline:0;
+  width: 0;
+  height: 0;
+}
+
+.hanna-font{
+  font-family:'HangeulNuri-Bold';
 }
 </style>

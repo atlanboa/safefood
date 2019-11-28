@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="background-image: url(../img/backgroundfoodimg/cart_top_bg_2.jpg);">
       <div>
         <img src="img/whatdidyoueat.png" alt srcset />
       </div>
     </div>
-    <br />
-    <br />
-    <div class="container">
-      <h1 class="text-center">Calender</h1>
+    <br>
+    <br>
+    <div  class="container">
+      <h1 class="text-center"> Calender </h1>
       <div>
         <v-calendar
           is-expanded
@@ -19,16 +19,20 @@
           @dayclick="click()"
         />
       </div>
-      <div>
-        <br>
-        <h1 class="text-center">당신이 가장 많이 먹는 시간대는 : {{this.maxIntakeTime}}시</h1>
-        <br>
+      <br>
+      <h2 class="text-center">가장 많이 먹는 시간</h2>
+      <div id="clock">
+        <p class="time d-flex justify-content-center">{{this.maxIntakeTime}}{{clockbar}}00{{clockbar}}00</p>
       </div>
     </div>
     <!-- popup layer -->
     <div class="row">
       <modals-container />
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
 </template>
 
@@ -83,8 +87,10 @@ export default {
   },
   data() {
     return {
+      clockbar:':',
       attrs: [
         {
+          date: '',
           key: "today",
           highlight: "red",
           dates: new Date()
@@ -142,10 +148,30 @@ export default {
       var sec = format.getSeconds();
       if (sec) sec = "0" + sec;
       return year + "-" + month + "-" + date;
+    },todo(){
+        this.intervalid1 = setInterval(function(){
+          this.clockbar=':'
+        }, 1000);
     }
+  },beforeDestroy(){
+    clearInterval(this.intervalid1),
+    clearInterval(this.intervalid2)
   }
 };
 </script>
 
-<style>
+<style lang="scss">
+.time {
+        font-family: 'Share Tech Mono', monospace;
+        color: #000000;
+        text-align: center;
+        letter-spacing: 0.05em;
+        font-size: 80px;
+        padding: 5px 0;
+    }
+    #clock{
+      background: #0f3854;
+      background: radial-gradient(ellipse at center,  #b2ecfc  0%, #ffffff 70%);
+      background-size: 100%;
+    }
 </style>
