@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bradcam_area breadcam_bg_1">
+    <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/foodinfo_top_bg.jpg);">
       <h3>Food Information View</h3>
     </div>
     <!-- about_area_start -->

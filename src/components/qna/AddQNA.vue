@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="bradcam_area" style="filter:grayscale(50%); background-image: url(../img/backgroundfoodimg/qna_top_bg.jpg);">
-      <h3>SignUP</h3>
+      <h3>Q &amp; A</h3>
     </div>
     <br />
     <div class="container">

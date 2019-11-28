@@ -48,7 +48,7 @@
                       <div class="col-xl-5 col-lg-4 d-none d-lg-block">
                           <div class="book_room">
                               <div class="socail_links">
-                                  <ul>
+                                  <ul class="right_side_menu">
                                     <li v-if="conformAdmin()">
                                       <router-link to="/settingmain" class="siteshare">
                                         <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'cog' }"/>
@@ -97,7 +97,7 @@
                                             <input v-model="pass" type="password" class="form-control" name="pass" id="password" required><br> <br> 
                                             <input type="submit" class="btn btn-light" value="로 그 인" id="login" style="width:100%;">
                                           </form>
-                                          <a class="btn" style=" background-color:black;" @click="passwordsearch()">비밀번호 찾기</a>
+                                          <button class="btn" style=" background-color:black; color:white;" @click="passwordsearch()">비밀번호 찾기</button>
                                         </div>
                                       </div>
                                     </li>
@@ -236,6 +236,7 @@ export default {
     right: 25px;
     display: none;
 }
+
 .right_side_menu{
     background-color: transparent;
     border:0px;
